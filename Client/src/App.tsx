@@ -6,9 +6,10 @@
  */
 
 import React from 'react';
+import {View} from 'react-native';
 
 function App(): JSX.Element {
-    return <></>;
+    return <View />;
 }
 
 export default App;
