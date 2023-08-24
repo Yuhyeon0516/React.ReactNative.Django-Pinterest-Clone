@@ -13,7 +13,8 @@ export default function Login() {
 
             <LinearGradient
                 colors={[
-                    '#00000000',
+                    '#00000030',
+                    '#00000060',
                     '#00000090',
                     '#000000',
                     '#000000',
