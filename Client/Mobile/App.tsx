@@ -13,7 +13,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 function App(): JSX.Element {
     return (
         <SafeAreaProvider>
-            <View style={{flex: 1, backgroundColor: 'white'}}>
+            <View style={{flex: 1, backgroundColor: 'black'}}>
                 <Login />
             </View>
         </SafeAreaProvider>
