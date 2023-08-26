@@ -63,7 +63,7 @@ export default function Login() {
 
     function onPressLogin() {
         Animated.timing(loginPopupYAnim, {
-            toValue: 50,
+            toValue: 0,
             duration: 400,
             useNativeDriver: false,
         }).start();
