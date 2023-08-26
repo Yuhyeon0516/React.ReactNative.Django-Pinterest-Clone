@@ -1,9 +1,18 @@
-import {View, Text, useWindowDimensions, ScrollView, Image} from 'react-native';
-import React from 'react';
+import {
+    View,
+    Text,
+    useWindowDimensions,
+    ScrollView,
+    Image,
+    TouchableWithoutFeedback,
+} from 'react-native';
+import React, {useState} from 'react';
 import LoginBtn from './LoginBtn';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function SixthSeq({onPressNext}: {onPressNext: () => void}) {
     const {width} = useWindowDimensions();
+    const [selectedImage, setSelectedImage] = useState<number[]>([]);
 
     const data = [
         {
@@ -74,6 +83,31 @@ export default function SixthSeq({onPressNext}: {onPressNext: () => void}) {
         {text: '디저트', image: require('../../../assets/join/dessert.png')},
     ];
 
+    function onPressImage(index: number) {
+        const wasSelected =
+            [...selectedImage].filter((item, _) => {
+                if (item === index) {
+                    return true;
+                }
+            }).length > 0;
+
+        if (wasSelected) {
+            setSelectedImage(prev =>
+                [...prev].filter((item, _) => {
+                    if (item !== index) {
+                        return true;
+                    }
+                }),
+            );
+        } else {
+            if (selectedImage.length === 5) {
+                return;
+            }
+
+            setSelectedImage(prev => [...prev].concat([index]));
+        }
+    }
+
     return (
         <View
             style={{
@@ -113,81 +147,207 @@ export default function SixthSeq({onPressNext}: {onPressNext: () => void}) {
                     }}>
                     <View style={{gap: 10}}>
                         {[...Array(10)].map((_, index) => {
+                            const isSelect =
+                                [...selectedImage].filter((item, _) => {
+                                    if (item === index) {
+                                        return true;
+                                    }
+                                }).length > 0;
+
                             return (
-                                <View
+                                <TouchableWithoutFeedback
                                     key={index}
-                                    style={{gap: 10, marginBottom: 5}}>
-                                    <Image
-                                        source={data[index].image}
-                                        style={{
-                                            width: (width - 30) / 3,
-                                            height: (width - 30) / 3,
-                                            backgroundColor: 'white',
-                                            borderRadius: 10,
-                                        }}
-                                    />
-                                    <Text
-                                        style={{
-                                            color: 'white',
-                                            textAlign: 'center',
-                                        }}>
-                                        {data[index].text}
-                                    </Text>
-                                </View>
+                                    onPress={() => onPressImage(index)}>
+                                    <View style={{gap: 10, marginBottom: 5}}>
+                                        <View
+                                            style={{
+                                                width: (width - 30) / 3,
+                                                height: (width - 30) / 3,
+                                            }}>
+                                            <Image
+                                                source={data[index].image}
+                                                style={{
+                                                    width: (width - 30) / 3,
+                                                    height: (width - 30) / 3,
+                                                    backgroundColor: 'white',
+                                                    borderRadius: 10,
+                                                    borderWidth: isSelect
+                                                        ? 2
+                                                        : 0,
+                                                    borderColor: 'white',
+                                                }}
+                                            />
+
+                                            {isSelect && (
+                                                <View
+                                                    style={{
+                                                        position: 'absolute',
+                                                        top: 5,
+                                                        right: 5,
+                                                        backgroundColor:
+                                                            'white',
+                                                        width: '20%',
+                                                        height: '20%',
+                                                        borderRadius: 10,
+                                                        justifyContent:
+                                                            'center',
+                                                        alignItems: 'center',
+                                                    }}>
+                                                    <FontAwesome
+                                                        name="check"
+                                                        size={15}
+                                                        color={'black'}
+                                                    />
+                                                </View>
+                                            )}
+                                        </View>
+                                        <Text
+                                            style={{
+                                                color: 'white',
+                                                textAlign: 'center',
+                                            }}>
+                                            {data[index].text}
+                                        </Text>
+                                    </View>
+                                </TouchableWithoutFeedback>
                             );
                         })}
                     </View>
 
                     <View style={{gap: 10}}>
                         {[...Array(10)].map((_, index) => {
+                            const isSelect =
+                                [...selectedImage].filter((item, _) => {
+                                    if (item === index + 10) {
+                                        return true;
+                                    }
+                                }).length > 0;
+
                             return (
-                                <View
+                                <TouchableWithoutFeedback
                                     key={index + 10}
-                                    style={{gap: 10, marginBottom: 5}}>
-                                    <Image
-                                        source={data[index + 10].image}
-                                        style={{
-                                            width: (width - 30) / 3,
-                                            height: (width - 30) / 3,
-                                            backgroundColor: 'white',
-                                            borderRadius: 10,
-                                        }}
-                                    />
-                                    <Text
-                                        style={{
-                                            color: 'white',
-                                            textAlign: 'center',
-                                        }}>
-                                        {data[index + 10].text}
-                                    </Text>
-                                </View>
+                                    onPress={() => onPressImage(index + 10)}>
+                                    <View style={{gap: 10, marginBottom: 5}}>
+                                        <View
+                                            style={{
+                                                width: (width - 30) / 3,
+                                                height: (width - 30) / 3,
+                                            }}>
+                                            <Image
+                                                source={data[index + 10].image}
+                                                style={{
+                                                    width: (width - 30) / 3,
+                                                    height: (width - 30) / 3,
+                                                    backgroundColor: 'white',
+                                                    borderRadius: 10,
+                                                    borderWidth: isSelect
+                                                        ? 2
+                                                        : 0,
+                                                    borderColor: 'white',
+                                                }}
+                                            />
+
+                                            {isSelect && (
+                                                <View
+                                                    style={{
+                                                        position: 'absolute',
+                                                        top: 5,
+                                                        right: 5,
+                                                        backgroundColor:
+                                                            'white',
+                                                        width: '20%',
+                                                        height: '20%',
+                                                        borderRadius: 10,
+                                                        justifyContent:
+                                                            'center',
+                                                        alignItems: 'center',
+                                                    }}>
+                                                    <FontAwesome
+                                                        name="check"
+                                                        size={15}
+                                                        color={'black'}
+                                                    />
+                                                </View>
+                                            )}
+                                        </View>
+                                        <Text
+                                            style={{
+                                                color: 'white',
+                                                textAlign: 'center',
+                                            }}>
+                                            {data[index + 10].text}
+                                        </Text>
+                                    </View>
+                                </TouchableWithoutFeedback>
                             );
                         })}
                     </View>
 
                     <View style={{gap: 10}}>
                         {[...Array(10)].map((_, index) => {
+                            const isSelect =
+                                [...selectedImage].filter((item, _) => {
+                                    if (item === index + 20) {
+                                        return true;
+                                    }
+                                }).length > 0;
+
                             return (
-                                <View
+                                <TouchableWithoutFeedback
                                     key={index + 20}
-                                    style={{gap: 10, marginBottom: 5}}>
-                                    <Image
-                                        source={data[index + 20].image}
-                                        style={{
-                                            width: (width - 30) / 3,
-                                            height: (width - 30) / 3,
-                                            backgroundColor: 'white',
-                                            borderRadius: 10,
-                                        }}
-                                    />
-                                    <Text
-                                        style={{
-                                            color: 'white',
-                                            textAlign: 'center',
-                                        }}>
-                                        {data[index + 20].text}
-                                    </Text>
-                                </View>
+                                    onPress={() => onPressImage(index + 20)}>
+                                    <View style={{gap: 10, marginBottom: 5}}>
+                                        <View
+                                            style={{
+                                                width: (width - 30) / 3,
+                                                height: (width - 30) / 3,
+                                            }}>
+                                            <Image
+                                                source={data[index + 20].image}
+                                                style={{
+                                                    width: (width - 30) / 3,
+                                                    height: (width - 30) / 3,
+                                                    backgroundColor: 'white',
+                                                    borderRadius: 10,
+                                                    borderWidth: isSelect
+                                                        ? 2
+                                                        : 0,
+                                                    borderColor: 'white',
+                                                }}
+                                            />
+
+                                            {isSelect && (
+                                                <View
+                                                    style={{
+                                                        position: 'absolute',
+                                                        top: 5,
+                                                        right: 5,
+                                                        backgroundColor:
+                                                            'white',
+                                                        width: '20%',
+                                                        height: '20%',
+                                                        borderRadius: 10,
+                                                        justifyContent:
+                                                            'center',
+                                                        alignItems: 'center',
+                                                    }}>
+                                                    <FontAwesome
+                                                        name="check"
+                                                        size={15}
+                                                        color={'black'}
+                                                    />
+                                                </View>
+                                            )}
+                                        </View>
+                                        <Text
+                                            style={{
+                                                color: 'white',
+                                                textAlign: 'center',
+                                            }}>
+                                            {data[index + 20].text}
+                                        </Text>
+                                    </View>
+                                </TouchableWithoutFeedback>
                             );
                         })}
                     </View>
