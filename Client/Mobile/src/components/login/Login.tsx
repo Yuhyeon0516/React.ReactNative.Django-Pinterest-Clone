@@ -3,25 +3,26 @@ import React, {useEffect, useRef} from 'react';
 import LoginBtn from './LoginBtn';
 import LinearGradient from 'react-native-linear-gradient';
 import LoginPopup from './LoginPopup';
+import JoinPopup from './JoinPopup';
 
 export default function Login() {
     const {width} = useWindowDimensions();
     const bgYAnim = useRef(new Animated.Value(50)).current;
-    const bgAnimLoop = Animated.loop(
-        Animated.timing(bgYAnim, {
-            toValue: -1000,
-            duration: 80000,
-            useNativeDriver: false,
-        }),
-        {
-            resetBeforeIteration: true,
-        },
-    );
     const loginPopupYAnim = useRef(new Animated.Value(1000)).current;
+    const joinPopupYAnim = useRef(new Animated.Value(1000)).current;
 
     useEffect(() => {
-        // bgAnimLoop.start();
-    }, [bgAnimLoop]);
+        Animated.loop(
+            Animated.timing(bgYAnim, {
+                toValue: -1000,
+                duration: 80000,
+                useNativeDriver: false,
+            }),
+            {
+                resetBeforeIteration: true,
+            },
+        ).start();
+    }, [bgYAnim]);
 
     const imagePath: any = {
         0: require('../../../assets/Background0.png'),
@@ -68,7 +69,13 @@ export default function Login() {
         }).start();
     }
 
-    function onPressJoin() {}
+    function onPressJoin() {
+        Animated.timing(joinPopupYAnim, {
+            toValue: 0,
+            duration: 400,
+            useNativeDriver: false,
+        }).start();
+    }
 
     return (
         <View style={{flex: 1}}>
@@ -212,6 +219,7 @@ export default function Login() {
             </LinearGradient>
 
             <LoginPopup loginPopupYAnim={loginPopupYAnim} />
+            <JoinPopup joinPopupYAnim={joinPopupYAnim} />
         </View>
     );
 }
