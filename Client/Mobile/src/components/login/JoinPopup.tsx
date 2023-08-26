@@ -11,6 +11,7 @@ import FirstSeq from './FirstSeq';
 import SecondSeq from './SecondSeq';
 import ThirdSeq from './ThirdSeq';
 import FourthSeq from './FourthSeq';
+import FifthSeq from './FifthSeq';
 
 export default function JoinPopup({
     joinPopupYAnim,
@@ -145,6 +146,8 @@ export default function JoinPopup({
                 )}
 
                 {sequenceDot === 3 && <FourthSeq onPressNext={onPressNext} />}
+
+                {sequenceDot === 4 && <FifthSeq onPressNext={onPressNext} />}
             </SafeAreaView>
         </Animated.View>
     );
