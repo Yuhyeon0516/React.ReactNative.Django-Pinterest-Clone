@@ -5,19 +5,24 @@ import {
     StyleProp,
     ViewStyle,
 } from 'react-native';
+
+interface LoginBtnPropsType {
+    bgColor: string;
+    title: string;
+    textColor: string;
+    style?: StyleProp<ViewStyle>;
+    onPress?: () => void;
+}
+
 export default function LoginBtn({
     bgColor,
     title,
     textColor,
     style,
-}: {
-    bgColor: string;
-    title: string;
-    textColor: string;
-    style?: StyleProp<ViewStyle>;
-}) {
+    onPress,
+}: LoginBtnPropsType) {
     return (
-        <TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={onPress}>
             <View
                 style={[
                     {
