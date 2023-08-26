@@ -1,13 +1,13 @@
 import {View, Text, TextInput} from 'react-native';
 import React from 'react';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Entypo from 'react-native-vector-icons/Entypo';
 
-export default function FirstSeq({
-    email,
-    setEmail,
+export default function SecondSeq({
+    password,
+    setPassword,
 }: {
-    email: string;
-    setEmail: React.Dispatch<React.SetStateAction<string>>;
+    password: string;
+    setPassword: React.Dispatch<React.SetStateAction<string>>;
 }) {
     return (
         <>
@@ -24,7 +24,7 @@ export default function FirstSeq({
                         fontSize: 24,
                         fontWeight: 'bold',
                     }}>
-                    이메일 주소를 알려주세요.
+                    비밀번호 생성
                 </Text>
 
                 <View
@@ -40,10 +40,10 @@ export default function FirstSeq({
                         flexDirection: 'row',
                     }}>
                     <TextInput
-                        value={email}
-                        onChangeText={setEmail}
-                        keyboardType="email-address"
-                        placeholder="이메일 주소를 입력합니다."
+                        value={password}
+                        onChangeText={setPassword}
+                        secureTextEntry={true}
+                        placeholder="비밀번호를 입력하세요"
                         placeholderTextColor={'#585658'}
                         style={{
                             fontSize: 20,
@@ -52,11 +52,11 @@ export default function FirstSeq({
                         }}
                     />
 
-                    <Ionicons
-                        name="close"
-                        size={37}
+                    <Entypo
+                        name="eye-with-line"
+                        size={20}
                         color={'white'}
-                        style={{marginRight: 12}}
+                        style={{marginRight: 15}}
                     />
                 </View>
             </View>

@@ -4,10 +4,14 @@ import {
     useWindowDimensions,
     SafeAreaView,
     TouchableOpacity,
+    KeyboardAvoidingView,
+    Platform,
 } from 'react-native';
 import React, {useState} from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FirstSeq from './FirstSeq';
+import LoginBtn from './LoginBtn';
+import SecondSeq from './SecondSeq';
 
 export default function JoinPopup({
     joinPopupYAnim,
@@ -17,6 +21,7 @@ export default function JoinPopup({
     const {height} = useWindowDimensions();
     const [sequenceDot, setSequenceDot] = useState(0);
     const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     function onPressBack() {
         if (sequenceDot === 0) {
@@ -26,11 +31,12 @@ export default function JoinPopup({
                 useNativeDriver: false,
             }).start();
         } else {
+            setSequenceDot(prev => prev - 1);
         }
     }
 
     function onPressNext() {
-        console.log('next');
+        setSequenceDot(prev => prev + 1);
     }
 
     return (
@@ -112,12 +118,33 @@ export default function JoinPopup({
                 </View>
 
                 {sequenceDot === 0 && (
-                    <FirstSeq
-                        email={email}
-                        setEmail={setEmail}
-                        onPressNext={onPressNext}
-                    />
+                    <FirstSeq email={email} setEmail={setEmail} />
                 )}
+                {sequenceDot === 1 && (
+                    <SecondSeq password={password} setPassword={setPassword} />
+                )}
+
+                <KeyboardAvoidingView
+                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                    keyboardVerticalOffset={40}
+                    style={{
+                        width: '100%',
+                        height: '70%',
+                        justifyContent: 'flex-end',
+                    }}>
+                    <View
+                        style={{
+                            width: '100%',
+                            alignItems: 'center',
+                        }}>
+                        <LoginBtn
+                            bgColor="red"
+                            title="다음"
+                            textColor="white"
+                            onPress={onPressNext}
+                        />
+                    </View>
+                </KeyboardAvoidingView>
             </SafeAreaView>
         </Animated.View>
     );
