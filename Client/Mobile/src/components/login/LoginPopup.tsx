@@ -23,6 +23,14 @@ export default function LoginPopup({
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    function onPressClose() {
+        Animated.timing(loginPopupYAnim, {
+            toValue: 1000,
+            duration: 400,
+            useNativeDriver: false,
+        }).start();
+    }
+
     return (
         <Animated.View
             style={{
@@ -53,8 +61,10 @@ export default function LoginPopup({
                         justifyContent: 'center',
                         padding: 10,
                     }}>
-                    <TouchableOpacity>
-                        <Ionicons size={35} color={'white'} name="close" />
+                    <TouchableOpacity
+                        onPress={onPressClose}
+                        hitSlop={{top: 7, left: 7, right: 7, bottom: 7}}>
+                        <Ionicons size={25} color={'white'} name="close" />
                     </TouchableOpacity>
                 </View>
 

@@ -17,7 +17,7 @@ export default function Login() {
             resetBeforeIteration: true,
         },
     );
-    const loginPopupYAnim = new Animated.Value(60);
+    const loginPopupYAnim = useRef(new Animated.Value(1000)).current;
 
     useEffect(() => {
         // bgAnimLoop.start();
@@ -60,7 +60,13 @@ export default function Login() {
         33: require('../../../assets/Background33.png'),
     };
 
-    function onPressLogin() {}
+    function onPressLogin() {
+        Animated.timing(loginPopupYAnim, {
+            toValue: 50,
+            duration: 400,
+            useNativeDriver: false,
+        }).start();
+    }
 
     function onPressJoin() {}
 
