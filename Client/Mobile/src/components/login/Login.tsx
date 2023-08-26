@@ -1,26 +1,27 @@
-import {
-    View,
-    Text,
-    Image,
-    Animated,
-    useWindowDimensions,
-    Easing,
-} from 'react-native';
+import {View, Text, Image, Animated, useWindowDimensions} from 'react-native';
 import React, {useEffect, useRef} from 'react';
 import LoginBtn from './LoginBtn';
 import LinearGradient from 'react-native-linear-gradient';
+import LoginPopup from './LoginPopup';
 
 export default function Login() {
     const {width} = useWindowDimensions();
-    const yAnim = useRef(new Animated.Value(50)).current;
+    const bgYAnim = useRef(new Animated.Value(50)).current;
+    const bgAnimLoop = Animated.loop(
+        Animated.timing(bgYAnim, {
+            toValue: -1000,
+            duration: 80000,
+            useNativeDriver: false,
+        }),
+        {
+            resetBeforeIteration: true,
+        },
+    );
+    const loginPopupYAnim = new Animated.Value(60);
 
     useEffect(() => {
-        Animated.timing(yAnim, {
-            toValue: -500,
-            duration: 40000,
-            useNativeDriver: false,
-        }).start();
-    }, [yAnim]);
+        // bgAnimLoop.start();
+    }, [bgAnimLoop]);
 
     const imagePath: any = {
         0: require('../../../assets/Background0.png'),
@@ -59,6 +60,10 @@ export default function Login() {
         33: require('../../../assets/Background33.png'),
     };
 
+    function onPressLogin() {}
+
+    function onPressJoin() {}
+
     return (
         <View style={{flex: 1}}>
             <Animated.View
@@ -69,7 +74,7 @@ export default function Login() {
                     justifyContent: 'space-between',
                     transform: [
                         {
-                            translateY: yAnim,
+                            translateY: bgYAnim,
                         },
                     ],
                 }}>
@@ -146,7 +151,7 @@ export default function Login() {
                     width: '100%',
                     height: '53%',
                     bottom: 0,
-                    zIndex: 10,
+                    zIndex: 2,
                     paddingVertical: 10,
                 }}>
                 <View
@@ -175,12 +180,14 @@ export default function Login() {
                         textColor="white"
                         title="가입"
                         style={{marginBottom: 10}}
+                        onPress={onPressJoin}
                     />
                     <LoginBtn
                         bgColor="white"
                         textColor="black"
                         title="로그인"
                         style={{marginBottom: 20}}
+                        onPress={onPressLogin}
                     />
 
                     <Text
@@ -197,6 +204,8 @@ export default function Login() {
                     </Text>
                 </View>
             </LinearGradient>
+
+            <LoginPopup loginPopupYAnim={loginPopupYAnim} />
         </View>
     );
 }
