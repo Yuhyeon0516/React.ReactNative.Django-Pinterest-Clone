@@ -12,6 +12,7 @@ import SecondSeq from './SecondSeq';
 import ThirdSeq from './ThirdSeq';
 import FourthSeq from './FourthSeq';
 import FifthSeq from './FifthSeq';
+import SixthSeq from './SixthSeq';
 
 export default function JoinPopup({
     joinPopupYAnim,
@@ -31,14 +32,26 @@ export default function JoinPopup({
                 toValue: 1000,
                 duration: 400,
                 useNativeDriver: false,
-            }).start();
+            }).start(({finished}) => {
+                if (finished) {
+                    setSequenceDot(0);
+                }
+            });
         } else {
             setSequenceDot(prev => prev - 1);
         }
     }
 
     function onPressNext() {
-        setSequenceDot(prev => prev + 1);
+        if (sequenceDot === 5) {
+            Animated.timing(joinPopupYAnim, {
+                toValue: 1000,
+                duration: 400,
+                useNativeDriver: false,
+            }).start();
+        } else {
+            setSequenceDot(prev => prev + 1);
+        }
     }
 
     return (
@@ -148,6 +161,8 @@ export default function JoinPopup({
                 {sequenceDot === 3 && <FourthSeq onPressNext={onPressNext} />}
 
                 {sequenceDot === 4 && <FifthSeq onPressNext={onPressNext} />}
+
+                {sequenceDot === 5 && <SixthSeq onPressNext={onPressNext} />}
             </SafeAreaView>
         </Animated.View>
     );
