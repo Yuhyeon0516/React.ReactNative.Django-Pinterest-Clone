@@ -10,6 +10,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FirstSeq from './FirstSeq';
 import SecondSeq from './SecondSeq';
 import ThirdSeq from './ThirdSeq';
+import FourthSeq from './FourthSeq';
 
 export default function JoinPopup({
     joinPopupYAnim,
@@ -142,6 +143,8 @@ export default function JoinPopup({
                         onPressNext={onPressNext}
                     />
                 )}
+
+                {sequenceDot === 3 && <FourthSeq onPressNext={onPressNext} />}
             </SafeAreaView>
         </Animated.View>
     );

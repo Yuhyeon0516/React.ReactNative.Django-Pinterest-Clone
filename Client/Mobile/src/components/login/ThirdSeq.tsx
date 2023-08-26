@@ -157,7 +157,7 @@ export default function ThirdSeq({
                 mode="date"
             />
 
-            <Text style={{color: '#656266', marginBottom: 50}}>
+            <Text style={{color: '#656266', marginBottom: 40}}>
                 Business 계정이더라도 본인 생일을 사용하세요.
             </Text>
 
