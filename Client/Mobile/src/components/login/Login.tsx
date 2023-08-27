@@ -17,18 +17,17 @@ export default function Login() {
         useNavigation<NativeStackNavigationProp<StackNavigationType>>();
 
     useEffect(() => {
-        // Animated.loop(
-        //     Animated.timing(bgYAnim, {
-        //         toValue: -1000,
-        //         duration: 80000,
-        //         useNativeDriver: false,
-        //     }),
-        //     {
-        //         resetBeforeIteration: true,
-        //     },
-        // ).start();
-        navigation.navigate('Main');
-    }, [navigation]);
+        Animated.loop(
+            Animated.timing(bgYAnim, {
+                toValue: -1000,
+                duration: 80000,
+                useNativeDriver: false,
+            }),
+            {
+                resetBeforeIteration: true,
+            },
+        ).start();
+    }, [bgYAnim]);
 
     const imagePath: any = {
         0: require('../../../assets/background/Background0.png'),
@@ -68,11 +67,12 @@ export default function Login() {
     };
 
     function onPressLogin() {
-        Animated.timing(loginPopupYAnim, {
-            toValue: 0,
-            duration: 400,
-            useNativeDriver: false,
-        }).start();
+        navigation.navigate('Main');
+        // Animated.timing(loginPopupYAnim, {
+        //     toValue: 0,
+        //     duration: 400,
+        //     useNativeDriver: false,
+        // }).start();
     }
 
     function onPressJoin() {
