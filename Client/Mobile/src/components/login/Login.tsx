@@ -4,25 +4,31 @@ import LoginBtn from './LoginBtn';
 import LinearGradient from 'react-native-linear-gradient';
 import LoginPopup from './LoginPopup';
 import JoinPopup from './JoinPopup';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {StackNavigationType} from '../Stack';
 
 export default function Login() {
     const {width} = useWindowDimensions();
     const bgYAnim = useRef(new Animated.Value(50)).current;
     const loginPopupYAnim = useRef(new Animated.Value(1000)).current;
     const joinPopupYAnim = useRef(new Animated.Value(1000)).current;
+    const navigation =
+        useNavigation<NativeStackNavigationProp<StackNavigationType>>();
 
     useEffect(() => {
-        Animated.loop(
-            Animated.timing(bgYAnim, {
-                toValue: -1000,
-                duration: 80000,
-                useNativeDriver: false,
-            }),
-            {
-                resetBeforeIteration: true,
-            },
-        ).start();
-    }, [bgYAnim]);
+        // Animated.loop(
+        //     Animated.timing(bgYAnim, {
+        //         toValue: -1000,
+        //         duration: 80000,
+        //         useNativeDriver: false,
+        //     }),
+        //     {
+        //         resetBeforeIteration: true,
+        //     },
+        // ).start();
+        navigation.navigate('Main');
+    }, [navigation]);
 
     const imagePath: any = {
         0: require('../../../assets/background/Background0.png'),

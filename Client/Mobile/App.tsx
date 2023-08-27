@@ -6,20 +6,15 @@
  */
 
 import React from 'react';
-import Login from './src/components/login/Login';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
-const Stack = createNativeStackNavigator();
+import Stack from './src/components/Stack';
 
 function App(): JSX.Element {
     return (
         <NavigationContainer>
             <SafeAreaProvider>
-                <Stack.Navigator screenOptions={{headerShown: false}}>
-                    <Stack.Screen name="Login" component={Login} />
-                </Stack.Navigator>
+                <Stack />
             </SafeAreaProvider>
         </NavigationContainer>
     );
