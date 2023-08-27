@@ -6,17 +6,17 @@
  */
 
 import React from 'react';
-import Login from './src/components/login/Login';
-import {View} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {NavigationContainer} from '@react-navigation/native';
+import Stack from './src/components/Stack';
 
 function App(): JSX.Element {
     return (
-        <SafeAreaProvider>
-            <View style={{flex: 1, backgroundColor: 'black'}}>
-                <Login />
-            </View>
-        </SafeAreaProvider>
+        <NavigationContainer>
+            <SafeAreaProvider>
+                <Stack />
+            </SafeAreaProvider>
+        </NavigationContainer>
     );
 }
 
