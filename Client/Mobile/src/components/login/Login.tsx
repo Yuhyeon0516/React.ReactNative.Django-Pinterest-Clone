@@ -78,7 +78,7 @@ export default function Login() {
     }
 
     return (
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, backgroundColor: 'black'}}>
             <Animated.View
                 style={{
                     height: 3000,
