@@ -23,6 +23,7 @@ const Tab = createBottomTabNavigator<TabParam>();
 
 export default function MainTab() {
     const safeAreaInset = useSafeAreaInsets();
+
     return (
         <Tab.Navigator
             sceneContainerStyle={{backgroundColor: 'black'}}
@@ -144,7 +145,16 @@ export default function MainTab() {
             }}>
             <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="Search" component={Search} />
-            <Tab.Screen name="Create" component={Create} />
+            <Tab.Screen
+                name="Create"
+                component={Create}
+                listeners={({navigation}) => ({
+                    tabPress: e => {
+                        e.preventDefault();
+                        navigation.navigate('CreateModal');
+                    },
+                })}
+            />
             <Tab.Screen name="Alarm" component={Alarm} />
             <Tab.Screen name="My" component={My} />
         </Tab.Navigator>
