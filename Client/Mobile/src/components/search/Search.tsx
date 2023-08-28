@@ -11,7 +11,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 export default function Search() {
     const [searchBarTab, setSearchBarTab] = useState(false);
     const [searchBarText, setSearchBarText] = useState('');
-    const searchBarRef = useRef<TextInput | undefined>(undefined);
+    const searchBarRef = useRef<TextInput | null>(null);
 
     function showSearchBar() {
         setSearchBarTab(true);
