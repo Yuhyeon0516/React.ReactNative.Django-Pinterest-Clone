@@ -30,6 +30,7 @@ export default function MainTab() {
             safeAreaInsets={{bottom: 0}}
             screenOptions={({route}) => {
                 return {
+                    tabBarHideOnKeyboard: true,
                     tabBarActiveBackgroundColor: 'black',
                     tabBarInactiveBackgroundColor: 'black',
                     headerShown: false,
