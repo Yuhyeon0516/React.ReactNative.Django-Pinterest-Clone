@@ -8,11 +8,18 @@ import {
     Animated,
     PanResponder,
     TouchableWithoutFeedback,
+    TouchableOpacity,
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {TabParam} from '../main/MainTab';
 
-export default function Alarm() {
+export default function Alarm({
+    navigation,
+}: {
+    navigation: NativeStackNavigationProp<TabParam>;
+}) {
     const {width} = useWindowDimensions();
     const [location, setLocation] = useState<'update' | 'message'>('update');
     const xAnim = useRef(new Animated.Value(0)).current;
@@ -179,8 +186,6 @@ export default function Alarm() {
                             }),
                         },
                     ],
-                    // justifyContent: 'center',
-                    // alignItems: 'center',
                 }}>
                 <View
                     style={{
@@ -227,22 +232,25 @@ export default function Alarm() {
                         아이디어가 있는 사람을 팔로잉해보세요.
                     </Text>
 
-                    <View
-                        style={{
-                            backgroundColor: '#211F21',
-                            height: 60,
-                            justifyContent: 'center',
-                            paddingHorizontal: 20,
-                            borderRadius: 30,
-                        }}>
-                        <Text
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Home')}>
+                        <View
                             style={{
-                                color: 'white',
-                                fontSize: 18,
+                                backgroundColor: '#211F21',
+                                height: 60,
+                                justifyContent: 'center',
+                                paddingHorizontal: 20,
+                                borderRadius: 30,
                             }}>
-                            홈피드로 이동
-                        </Text>
-                    </View>
+                            <Text
+                                style={{
+                                    color: 'white',
+                                    fontSize: 18,
+                                }}>
+                                홈피드로 이동
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
 
                 <View
