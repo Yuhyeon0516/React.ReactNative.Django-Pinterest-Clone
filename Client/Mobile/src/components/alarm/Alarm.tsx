@@ -6,6 +6,8 @@ import {
     useWindowDimensions,
     Image,
 } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default function Alarm() {
     const {width} = useWindowDimensions();
@@ -63,11 +65,11 @@ export default function Alarm() {
                     height: '100%',
                     width: width * 2,
                     flexDirection: 'row',
-                    // transform: [
-                    //     {
-                    //         translateX: -width,
-                    //     },
-                    // ],
+                    transform: [
+                        {
+                            translateX: -width,
+                        },
+                    ],
                     // justifyContent: 'center',
                     // alignItems: 'center',
                 }}>
@@ -78,6 +80,7 @@ export default function Alarm() {
                         justifyContent: 'center',
                         alignItems: 'center',
                         paddingHorizontal: 35,
+                        top: -30,
                     }}>
                     <Image
                         source={require('../../../assets/bell.png')}
@@ -137,9 +140,90 @@ export default function Alarm() {
                     style={{
                         width: '50%',
                         height: '100%',
-                        backgroundColor: 'yellow',
-                    }}
-                />
+                    }}>
+                    <View
+                        style={{
+                            width: '100%',
+                            paddingHorizontal: 10,
+                            paddingTop: 15,
+                            gap: 10,
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                        }}>
+                        <View
+                            style={{
+                                width: 50,
+                                height: 50,
+                                borderRadius: 100,
+                                backgroundColor: 'red',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                            }}>
+                            <MaterialCommunityIcons
+                                name="square-edit-outline"
+                                color={'white'}
+                                size={30}
+                                style={{margin: 10}}
+                            />
+                        </View>
+
+                        <View
+                            style={{
+                                justifyContent: 'center',
+                            }}>
+                            <Text
+                                style={{
+                                    color: 'white',
+                                    fontSize: 20,
+                                    fontWeight: 'bold',
+                                }}>
+                                새 메시지
+                            </Text>
+                        </View>
+                    </View>
+
+                    <View
+                        style={{
+                            width: '100%',
+                            paddingHorizontal: 10,
+                            paddingTop: 15,
+                            gap: 10,
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                        }}>
+                        <View
+                            style={{
+                                width: 50,
+                                height: 50,
+                                borderRadius: 100,
+                                backgroundColor: '#DBD8DD',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                            }}>
+                            <Ionicons
+                                name="person-add-sharp"
+                                color={'black'}
+                                size={25}
+                                style={{margin: 10}}
+                            />
+                        </View>
+
+                        <View>
+                            <Text
+                                style={{
+                                    color: 'white',
+                                    fontSize: 16,
+                                    fontWeight: 'bold',
+                                }}>
+                                친구 초대
+                            </Text>
+
+                            <Text style={{color: 'white', fontSize: 16}}>
+                                연결하여 채팅을 시작하세요.
+                            </Text>
+                        </View>
+                    </View>
+                </View>
             </View>
         </SafeAreaView>
     );
