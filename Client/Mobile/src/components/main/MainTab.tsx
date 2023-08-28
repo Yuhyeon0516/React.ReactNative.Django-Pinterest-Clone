@@ -4,12 +4,12 @@ import Home from '../home/Home';
 import Search from '../search/Search';
 import Create from '../create/Create';
 import Alarm from '../alarm/Alarm';
-import My from '../my/My';
 import {Text} from 'react-native';
 import Foundation from 'react-native-vector-icons/Foundation';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import MyStack from '../my/MyStack';
 
 export type TabParam = {
     Home: undefined;
@@ -157,7 +157,7 @@ export default function MainTab() {
                 })}
             />
             <Tab.Screen name="Alarm" component={Alarm} />
-            <Tab.Screen name="My" component={My} />
+            <Tab.Screen name="My" component={MyStack} />
         </Tab.Navigator>
     );
 }
