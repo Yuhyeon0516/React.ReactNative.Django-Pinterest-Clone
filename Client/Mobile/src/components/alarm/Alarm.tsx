@@ -1,16 +1,72 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import {
     View,
     Text,
     SafeAreaView,
     useWindowDimensions,
     Image,
+    Animated,
+    PanResponder,
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default function Alarm() {
     const {width} = useWindowDimensions();
+    const [location, setLocation] = useState<'update' | 'message'>('update');
+    const xAnim = useRef(new Animated.Value(0)).current;
+    const panRes = PanResponder.create({
+        onMoveShouldSetPanResponder: () => true,
+        onPanResponderMove: (_, gestureState) => {
+            const {dx} = gestureState;
+
+            if (location === 'update') {
+                console.log(-dx / width);
+                xAnim.setValue(-dx / width);
+            } else {
+                xAnim.setValue(1 - dx / width);
+            }
+        },
+        onPanResponderEnd: (_, gestureState) => {
+            const {dx} = gestureState;
+
+            if (dx < -120) {
+                Animated.timing(xAnim, {
+                    toValue: 1,
+                    duration: 400,
+                    useNativeDriver: false,
+                }).start();
+
+                setLocation('message');
+            } else if (dx < 0 && dx > -120) {
+                const value = location === 'update' ? 0 : 1;
+
+                Animated.timing(xAnim, {
+                    toValue: value,
+                    duration: 400,
+                    useNativeDriver: false,
+                }).start();
+            }
+
+            if (dx > 120) {
+                Animated.timing(xAnim, {
+                    toValue: 0,
+                    duration: 400,
+                    useNativeDriver: false,
+                }).start();
+
+                setLocation('update');
+            } else if (dx > 0 && dx < 120) {
+                const value = location === 'update' ? 0 : 1;
+
+                Animated.timing(xAnim, {
+                    toValue: value,
+                    duration: 400,
+                    useNativeDriver: false,
+                }).start();
+            }
+        },
+    });
 
     return (
         <SafeAreaView style={{flex: 1}}>
@@ -21,6 +77,7 @@ export default function Alarm() {
                     justifyContent: 'center',
                     alignItems: 'center',
                     flexDirection: 'row',
+                    marginTop: 15,
                 }}>
                 <View
                     style={{
@@ -29,7 +86,13 @@ export default function Alarm() {
                         justifyContent: 'center',
                         alignItems: 'center',
                     }}>
-                    <Text style={{color: 'black', fontSize: 16}}>업데이트</Text>
+                    <Text
+                        style={{
+                            color: location === 'update' ? 'black' : 'white',
+                            fontSize: 16,
+                        }}>
+                        업데이트
+                    </Text>
                 </View>
 
                 <View
@@ -39,10 +102,16 @@ export default function Alarm() {
                         justifyContent: 'center',
                         alignItems: 'center',
                     }}>
-                    <Text style={{color: 'white', fontSize: 16}}>메시지</Text>
+                    <Text
+                        style={{
+                            color: location === 'message' ? 'black' : 'white',
+                            fontSize: 16,
+                        }}>
+                        메시지
+                    </Text>
                 </View>
 
-                <View
+                <Animated.View
                     style={{
                         position: 'absolute',
                         alignSelf: 'center',
@@ -53,21 +122,31 @@ export default function Alarm() {
                         zIndex: -1,
                         transform: [
                             {
-                                translateX: ((-width / 100) * 20) / 2,
+                                translateX: xAnim.interpolate({
+                                    inputRange: [0, 1],
+                                    outputRange: [
+                                        ((-width / 100) * 20) / 2,
+                                        ((width / 100) * 20) / 2,
+                                    ],
+                                }),
                             },
                         ],
                     }}
                 />
             </View>
 
-            <View
+            <Animated.View
+                {...panRes.panHandlers}
                 style={{
                     height: '100%',
                     width: width * 2,
                     flexDirection: 'row',
                     transform: [
                         {
-                            translateX: -width,
+                            translateX: xAnim.interpolate({
+                                inputRange: [0, 1],
+                                outputRange: [0, -width],
+                            }),
                         },
                     ],
                     // justifyContent: 'center',
@@ -224,7 +303,7 @@ export default function Alarm() {
                         </View>
                     </View>
                 </View>
-            </View>
+            </Animated.View>
         </SafeAreaView>
     );
 }
