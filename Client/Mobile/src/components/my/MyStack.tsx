@@ -17,7 +17,11 @@ export default function MyStack() {
                 headerShown: false,
             }}>
             <Stack.Screen name="my" component={My} />
-            <Stack.Screen name="settings" component={Settings} />
+            <Stack.Screen
+                name="settings"
+                component={Settings}
+                options={{presentation: 'containedTransparentModal'}}
+            />
         </Stack.Navigator>
     );
 }

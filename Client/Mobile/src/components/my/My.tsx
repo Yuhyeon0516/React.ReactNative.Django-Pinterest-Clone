@@ -11,8 +11,9 @@ import {
 } from 'react-native';
 import React, {useRef, useState} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {NavigationProp} from '@react-navigation/native';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {TabParam} from '../main/MainTab';
+import {MyStackNavigationType} from './MyStack';
 
 export default function My({
     navigation,
@@ -27,6 +28,7 @@ export default function My({
     const sectionAnim = useRef(new Animated.Value(0)).current;
     const scrollAnim = useRef(new Animated.Value(0)).current;
     const scrollRef = useRef<ScrollView | null>(null);
+    const myNavigation = useNavigation<NavigationProp<MyStackNavigationType>>();
 
     const panRes = PanResponder.create({
         onMoveShouldSetPanResponder: () => true,
@@ -41,8 +43,6 @@ export default function My({
         },
         onPanResponderEnd: (_, gestureState) => {
             const {dx} = gestureState;
-
-            console.log(dx);
 
             if (dx < -120) {
                 onPressBoard();
@@ -121,11 +121,15 @@ export default function My({
                             color={'white'}
                             size={30}
                         />
-                        <Ionicons
-                            name="settings-outline"
-                            color={'white'}
-                            size={30}
-                        />
+
+                        <TouchableWithoutFeedback
+                            onPress={() => myNavigation.navigate('settings')}>
+                            <Ionicons
+                                name="settings-outline"
+                                color={'white'}
+                                size={30}
+                            />
+                        </TouchableWithoutFeedback>
                     </View>
 
                     <View
