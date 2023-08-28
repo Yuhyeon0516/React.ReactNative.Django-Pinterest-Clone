@@ -7,6 +7,7 @@ import {
     Image,
     Animated,
     PanResponder,
+    TouchableWithoutFeedback,
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -21,7 +22,6 @@ export default function Alarm() {
             const {dx} = gestureState;
 
             if (location === 'update') {
-                console.log(-dx / width);
                 xAnim.setValue(-dx / width);
             } else {
                 xAnim.setValue(1 - dx / width);
@@ -31,13 +31,7 @@ export default function Alarm() {
             const {dx} = gestureState;
 
             if (dx < -120) {
-                Animated.timing(xAnim, {
-                    toValue: 1,
-                    duration: 400,
-                    useNativeDriver: false,
-                }).start();
-
-                setLocation('message');
+                goToMessage();
             } else if (dx < 0 && dx > -120) {
                 const value = location === 'update' ? 0 : 1;
 
@@ -49,13 +43,7 @@ export default function Alarm() {
             }
 
             if (dx > 120) {
-                Animated.timing(xAnim, {
-                    toValue: 0,
-                    duration: 400,
-                    useNativeDriver: false,
-                }).start();
-
-                setLocation('update');
+                goToUpdate();
             } else if (dx > 0 && dx < 120) {
                 const value = location === 'update' ? 0 : 1;
 
@@ -68,6 +56,30 @@ export default function Alarm() {
         },
     });
 
+    function goToUpdate() {
+        Animated.timing(xAnim, {
+            toValue: 0,
+            duration: 400,
+            useNativeDriver: false,
+        }).start(({finished}) => {
+            if (finished) {
+                setLocation('update');
+            }
+        });
+    }
+
+    function goToMessage() {
+        Animated.timing(xAnim, {
+            toValue: 1,
+            duration: 400,
+            useNativeDriver: false,
+        }).start(({finished}) => {
+            if (finished) {
+                setLocation('message');
+            }
+        });
+    }
+
     return (
         <SafeAreaView style={{flex: 1}}>
             <View
@@ -79,37 +91,55 @@ export default function Alarm() {
                     flexDirection: 'row',
                     marginTop: 15,
                 }}>
-                <View
+                <TouchableWithoutFeedback
+                    onPress={goToUpdate}
+                    hitSlop={{top: 5, left: 5, bottom: 5, right: 5}}
                     style={{
-                        width: '20%',
-                        height: '100%',
                         justifyContent: 'center',
                         alignItems: 'center',
                     }}>
-                    <Text
+                    <View
                         style={{
-                            color: location === 'update' ? 'black' : 'white',
-                            fontSize: 16,
+                            width: '20%',
+                            height: '100%',
+                            justifyContent: 'center',
+                            alignItems: 'center',
                         }}>
-                        업데이트
-                    </Text>
-                </View>
+                        <Text
+                            style={{
+                                color:
+                                    location === 'update' ? 'black' : 'white',
+                                fontSize: 16,
+                            }}>
+                            업데이트
+                        </Text>
+                    </View>
+                </TouchableWithoutFeedback>
 
-                <View
+                <TouchableWithoutFeedback
+                    onPress={goToMessage}
+                    hitSlop={{top: 5, left: 5, bottom: 5, right: 5}}
                     style={{
-                        width: '20%',
-                        height: '100%',
                         justifyContent: 'center',
                         alignItems: 'center',
                     }}>
-                    <Text
+                    <View
                         style={{
-                            color: location === 'message' ? 'black' : 'white',
-                            fontSize: 16,
+                            width: '20%',
+                            height: '100%',
+                            justifyContent: 'center',
+                            alignItems: 'center',
                         }}>
-                        메시지
-                    </Text>
-                </View>
+                        <Text
+                            style={{
+                                color:
+                                    location === 'message' ? 'black' : 'white',
+                                fontSize: 16,
+                            }}>
+                            메시지
+                        </Text>
+                    </View>
+                </TouchableWithoutFeedback>
 
                 <Animated.View
                     style={{
