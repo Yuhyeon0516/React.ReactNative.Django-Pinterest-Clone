@@ -11,7 +11,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-type TabParam = {
+export type TabParam = {
     Home: undefined;
     Search: undefined;
     Create: undefined;
