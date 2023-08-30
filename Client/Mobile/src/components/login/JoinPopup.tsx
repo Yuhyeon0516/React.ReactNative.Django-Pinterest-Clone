@@ -13,6 +13,7 @@ import ThirdSeq from './ThirdSeq';
 import FourthSeq from './FourthSeq';
 import FifthSeq from './FifthSeq';
 import SixthSeq from './SixthSeq';
+import axiosInstance from '../../utils/axios';
 
 export default function JoinPopup({
     joinPopupYAnim,
@@ -24,6 +25,7 @@ export default function JoinPopup({
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
+    const [gender, setGender] = useState('');
     const [birthDate, setBirthDate] = useState(new Date());
 
     function onPressBack() {
@@ -42,13 +44,33 @@ export default function JoinPopup({
         }
     }
 
-    function onPressNext() {
+    async function onPressNext() {
         if (sequenceDot === 5) {
             Animated.timing(joinPopupYAnim, {
                 toValue: 1000,
                 duration: 400,
                 useNativeDriver: false,
-            }).start();
+            }).start(async ({finished}) => {
+                if (finished) {
+                    const formattingDate = `${birthDate.getFullYear()}-${
+                        birthDate.getMonth() + 1
+                    }-${birthDate.getDate()}`;
+                    const request = {
+                        username: name,
+                        password: password,
+                        email: email,
+                        birth_date: formattingDate,
+                        gender: gender,
+                    };
+
+                    const token = await axiosInstance.post(
+                        'account/signup/',
+                        request,
+                    );
+
+                    console.log(token.data);
+                }
+            });
         } else {
             setSequenceDot(prev => prev + 1);
         }
@@ -158,7 +180,12 @@ export default function JoinPopup({
                     />
                 )}
 
-                {sequenceDot === 3 && <FourthSeq onPressNext={onPressNext} />}
+                {sequenceDot === 3 && (
+                    <FourthSeq
+                        setGender={setGender}
+                        onPressNext={onPressNext}
+                    />
+                )}
 
                 {sequenceDot === 4 && <FifthSeq onPressNext={onPressNext} />}
 
