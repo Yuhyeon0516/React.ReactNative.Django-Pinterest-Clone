@@ -4,17 +4,12 @@ import LoginBtn from './LoginBtn';
 import LinearGradient from 'react-native-linear-gradient';
 import LoginPopup from './LoginPopup';
 import JoinPopup from './JoinPopup';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {StackNavigationType} from '../Stack';
 
 export default function Login() {
     const {width} = useWindowDimensions();
     const bgYAnim = useRef(new Animated.Value(50)).current;
     const loginPopupYAnim = useRef(new Animated.Value(1000)).current;
     const joinPopupYAnim = useRef(new Animated.Value(1000)).current;
-    const navigation =
-        useNavigation<NativeStackNavigationProp<StackNavigationType>>();
 
     useEffect(() => {
         Animated.loop(
@@ -67,12 +62,11 @@ export default function Login() {
     };
 
     function onPressLogin() {
-        navigation.navigate('Main');
-        // Animated.timing(loginPopupYAnim, {
-        //     toValue: 0,
-        //     duration: 400,
-        //     useNativeDriver: false,
-        // }).start();
+        Animated.timing(loginPopupYAnim, {
+            toValue: 0,
+            duration: 400,
+            useNativeDriver: false,
+        }).start();
     }
 
     function onPressJoin() {
