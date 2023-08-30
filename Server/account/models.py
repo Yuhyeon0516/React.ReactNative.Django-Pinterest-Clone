@@ -8,6 +8,7 @@ from .managers import UserManager
 
 # Create your models here.
 
+
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(_("username"), max_length=50, blank=True)
     email = models.EmailField(_("email address"), unique=True)
@@ -19,7 +20,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = ["username"]
 
     class Meta:
         verbose_name = _("user")
@@ -31,6 +32,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
