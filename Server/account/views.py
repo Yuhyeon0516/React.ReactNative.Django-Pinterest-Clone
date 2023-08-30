@@ -1,7 +1,9 @@
+
+from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
-from rest_framework import exceptions
+from rest_framework import exceptions,status
 
 from . import models
 
@@ -18,8 +20,7 @@ class SignUpView(APIView):
 
             token = Token.objects.create(user=user)
 
-            return Response({"Token": token.key})
+            return Response(data={"Token": token.key}, status=status.HTTP_201_CREATED)
         
         except:
-
             raise exceptions.AuthenticationFailed()

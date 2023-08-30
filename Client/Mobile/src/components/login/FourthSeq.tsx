@@ -2,7 +2,13 @@ import {View, Text} from 'react-native';
 import React from 'react';
 import LoginBtn from './LoginBtn';
 
-export default function FourthSeq({onPressNext}: {onPressNext: () => void}) {
+export default function FourthSeq({
+    setGender,
+    onPressNext,
+}: {
+    setGender: React.Dispatch<React.SetStateAction<string>>;
+    onPressNext: () => void;
+}) {
     return (
         <View
             style={{
@@ -37,7 +43,10 @@ export default function FourthSeq({onPressNext}: {onPressNext: () => void}) {
                 title="여성"
                 textColor="white"
                 style={{borderColor: 'white', borderWidth: 1.5}}
-                onPress={onPressNext}
+                onPress={() => {
+                    setGender('여성');
+                    onPressNext();
+                }}
             />
 
             <LoginBtn
@@ -45,7 +54,10 @@ export default function FourthSeq({onPressNext}: {onPressNext: () => void}) {
                 title="남성"
                 textColor="white"
                 style={{borderColor: 'white', borderWidth: 1.5}}
-                onPress={onPressNext}
+                onPress={() => {
+                    setGender('남성');
+                    onPressNext();
+                }}
             />
 
             <LoginBtn

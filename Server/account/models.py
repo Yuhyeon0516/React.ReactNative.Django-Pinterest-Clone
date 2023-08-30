@@ -34,5 +34,5 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    birth_date = models.DateField(_("birth date"))
+    birth_date = models.CharField(_("birth date"), max_length=20)
     gender = models.CharField(_("gender"), max_length=5)
