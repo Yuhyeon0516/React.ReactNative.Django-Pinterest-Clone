@@ -1,4 +1,5 @@
 
+import email
 from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -24,3 +25,9 @@ class SignUpView(APIView):
         
         except:
             raise exceptions.AuthenticationFailed()
+        
+    def get(self, request):
+        queryset = models.User.objects.filter(email=request.user)
+        name = queryset.values("username", "email")
+
+        return Response(name[0], status=status.HTTP_200_OK)
