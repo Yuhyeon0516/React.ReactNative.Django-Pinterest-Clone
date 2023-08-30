@@ -1,10 +1,8 @@
-
-import email
-from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework import exceptions,status
+from django.contrib.auth import authenticate
 
 from . import models
 
@@ -31,3 +29,15 @@ class SignUpView(APIView):
         name = queryset.values("username", "email")
 
         return Response(name[0], status=status.HTTP_200_OK)
+    
+class LoginView(APIView):
+    def post(self, request):
+        user = authenticate(username=request.data["email"], password=request.data["password"])
+
+        if user is not None:
+            token = Token.objects.get(user=user)
+
+            return Response(data={"Token": token.key}, status=status.HTTP_202_ACCEPTED)
+        
+        else:
+            return Response("", status=status.HTTP_406_NOT_ACCEPTABLE)

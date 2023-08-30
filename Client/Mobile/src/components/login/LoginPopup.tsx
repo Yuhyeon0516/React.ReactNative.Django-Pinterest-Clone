@@ -12,6 +12,7 @@ import {
 import React, {useState} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import LoginBtn from './LoginBtn';
+import useDjango from '../../hooks/useDjango';
 
 const TEXT_INPUT_GAP = Platform.OS === 'ios' ? 7 : -7;
 
@@ -23,6 +24,7 @@ export default function LoginPopup({
     const {height} = useWindowDimensions();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const {attemptingLogin} = useDjango();
 
     function onPressClose() {
         Animated.timing(loginPopupYAnim, {
@@ -213,6 +215,9 @@ export default function LoginPopup({
                             bgColor="red"
                             title="로그인"
                             textColor="white"
+                            onPress={() => {
+                                attemptingLogin(email, password);
+                            }}
                         />
                     </View>
 
