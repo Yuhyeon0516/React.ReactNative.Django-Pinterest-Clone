@@ -10,7 +10,8 @@ from .managers import UserManager
 
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(_("username"), max_length=50, blank=True)
-    email = models.EmailField(_("email_address"), unique=True)
+    email = models.EmailField(_("email address"), unique=True)
+
     is_staff = models.BooleanField(_("staff status"), default=False)
     is_active = models.BooleanField(_("active"), default=True)
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
@@ -30,3 +31,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    birth_date = models.DateField(_("birth date"))
+    gender = models.CharField(_("gender"), max_length=5)

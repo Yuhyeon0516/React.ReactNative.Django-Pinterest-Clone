@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.utils.translation import gettext_lazy as _
-from .models import User
+from .models import User, Profile
 
 # Register your models here.
 
@@ -36,4 +36,11 @@ class MyUserAdmin(UserAdmin):
     search_fields = ('email', 'username')
     ordering = ('email',)
 
+class MyProfileAdmin(admin.ModelAdmin):
+    fieldsets = (
+        (None, {'fields': ('gender', 'birth_date')}),
+    )
+    list_display = ('user_id', 'birth_date', 'gender')
+
 admin.site.register(User, MyUserAdmin)
+admin.site.register(Profile, MyProfileAdmin)
