@@ -6,41 +6,57 @@ from .models import User, Profile
 
 # Register your models here.
 
+
 class MyUserChangeForm(UserChangeForm):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = "__all__"
+
 
 class MyUserCreationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('email','username')
+        fields = ("email", "username")
+
 
 class MyUserAdmin(UserAdmin):
     fieldsets = (
-        (None, {'fields': ('email', 'password', 'username')}),
-        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
-                                        'groups', 'user_permissions')}),
-        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+        (None, {"fields": ("email", "password", "username")}),
+        (
+            _("Permissions"),
+            {
+                "fields": (
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                    "groups",
+                    "user_permissions",
+                )
+            },
+        ),
+        (_("Important dates"), {"fields": ("last_login", "date_joined")}),
     )
     add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2'),
-        }),
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": ("email", "password1", "password2"),
+            },
+        ),
     )
     form = MyUserChangeForm
     add_form = MyUserCreationForm
-    list_display = ('email', 'username', 'is_staff')
-    list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups')
-    search_fields = ('email', 'username')
-    ordering = ('email',)
+    list_display = ("email", "username", "is_staff")
+    list_filter = ("is_staff", "is_superuser", "is_active", "groups")
+    search_fields = ("email", "username")
+    ordering = ("email",)
+
 
 class MyProfileAdmin(admin.ModelAdmin):
-    fieldsets = (
-        (None, {'fields': ('gender', 'birth_date')}),
-    )
-    list_display = ('user_id', 'birth_date', 'gender')
+    fieldsets = ((None, {"fields": ("gender", "birth_date")}),)
+    list_display = ("user_id", "birth_date", "gender")
+
 
 admin.site.register(User, MyUserAdmin)
 admin.site.register(Profile, MyProfileAdmin)
