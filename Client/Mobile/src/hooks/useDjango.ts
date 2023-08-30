@@ -1,13 +1,20 @@
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 import axiosInstance from '../utils/axios';
+import {StackNavigationType} from '../components/Stack';
 
-async function attemptingLogin(email: string, password: string) {
-    const request = {
-        email: email,
-        password: password,
-    };
-    const result = await axiosInstance.post('account/login', request);
+export default function useDjango() {
+    const navigation = useNavigation<NavigationProp<StackNavigationType>>();
 
-    console.log(result);
+    async function attemptingLogin(email: string, password: string) {
+        const request = {
+            email: email,
+            password: password,
+        };
+        const result = await axiosInstance.post('account/login/', request);
+
+        console.log(result.data); // Token 확인(추후 상태관리 예정)
+        navigation.navigate('Main');
+    }
+
+    return {attemptingLogin};
 }
-
-export {attemptingLogin};
