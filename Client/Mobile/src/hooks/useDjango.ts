@@ -16,5 +16,29 @@ export default function useDjango() {
         navigation.navigate('Main');
     }
 
-    return {attemptingLogin};
+    async function joinMembership(
+        name: string,
+        password: string,
+        email: string,
+        birthDate: Date,
+        gender: string,
+    ) {
+        const formattingDate = `${birthDate.getFullYear()}-${
+            birthDate.getMonth() + 1
+        }-${birthDate.getDate()}`;
+        const request = {
+            username: name,
+            password: password,
+            email: email,
+            birth_date: formattingDate,
+            gender: gender,
+        };
+
+        const result = await axiosInstance.post('account/signup/', request);
+
+        console.log(result.data);
+        navigation.navigate('Main');
+    }
+
+    return {attemptingLogin, joinMembership};
 }

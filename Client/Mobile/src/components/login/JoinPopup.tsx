@@ -13,7 +13,7 @@ import ThirdSeq from './ThirdSeq';
 import FourthSeq from './FourthSeq';
 import FifthSeq from './FifthSeq';
 import SixthSeq from './SixthSeq';
-import axiosInstance from '../../utils/axios';
+import useDjango from '../../hooks/useDjango';
 
 export default function JoinPopup({
     joinPopupYAnim,
@@ -27,6 +27,7 @@ export default function JoinPopup({
     const [name, setName] = useState('');
     const [gender, setGender] = useState('');
     const [birthDate, setBirthDate] = useState(new Date());
+    const {joinMembership} = useDjango();
 
     function onPressBack() {
         if (sequenceDot === 0) {
@@ -52,23 +53,7 @@ export default function JoinPopup({
                 useNativeDriver: false,
             }).start(async ({finished}) => {
                 if (finished) {
-                    const formattingDate = `${birthDate.getFullYear()}-${
-                        birthDate.getMonth() + 1
-                    }-${birthDate.getDate()}`;
-                    const request = {
-                        username: name,
-                        password: password,
-                        email: email,
-                        birth_date: formattingDate,
-                        gender: gender,
-                    };
-
-                    const token = await axiosInstance.post(
-                        'account/signup/',
-                        request,
-                    );
-
-                    console.log(token.data);
+                    joinMembership(name, password, email, birthDate, gender);
                 }
             });
         } else {
