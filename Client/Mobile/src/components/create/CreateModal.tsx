@@ -147,37 +147,43 @@ export default function CreateModal({
                         </Text>
                     </View>
 
-                    <View
-                        style={{
-                            width: width / 5,
-                            height: '80%',
+                    <TouchableOpacity
+                        onPress={() => {
+                            navigation.goBack();
+                            navigation.navigate('CreateBoard');
                         }}>
                         <View
                             style={{
-                                width: '100%',
-                                height: '60%',
-                                backgroundColor: '#3C3A3D',
-                                borderRadius: 15,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                marginBottom: 10,
+                                width: width / 5,
+                                height: '80%',
                             }}>
-                            <MaterialCommunityIcons
-                                name="view-dashboard"
-                                color={'white'}
-                                size={30}
-                            />
-                        </View>
+                            <View
+                                style={{
+                                    width: '100%',
+                                    height: '60%',
+                                    backgroundColor: '#3C3A3D',
+                                    borderRadius: 15,
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    marginBottom: 10,
+                                }}>
+                                <MaterialCommunityIcons
+                                    name="view-dashboard"
+                                    color={'white'}
+                                    size={30}
+                                />
+                            </View>
 
-                        <Text
-                            style={{
-                                color: 'white',
-                                textAlign: 'center',
-                                fontWeight: 'bold',
-                            }}>
-                            보드
-                        </Text>
-                    </View>
+                            <Text
+                                style={{
+                                    color: 'white',
+                                    textAlign: 'center',
+                                    fontWeight: 'bold',
+                                }}>
+                                보드
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>
