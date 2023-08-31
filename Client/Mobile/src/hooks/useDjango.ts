@@ -1,6 +1,8 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import axiosInstance from '../utils/axios';
 import {StackNavigationType} from '../components/Stack';
+import {Alert} from 'react-native';
+import {setToken} from '../utils/storage';
 
 export default function useDjango() {
     const navigation = useNavigation<NavigationProp<StackNavigationType>>();
@@ -10,10 +12,18 @@ export default function useDjango() {
             email: email,
             password: password,
         };
-        const result = await axiosInstance.post('account/login/', request);
 
-        console.log(result.data); // Token 확인(추후 상태관리 예정)
-        navigation.navigate('Main');
+        try {
+            const result = await axiosInstance.post('account/login/', request);
+
+            await setToken(result.data.Token);
+            navigation.navigate('Main');
+        } catch {
+            Alert.alert(
+                '로그인에 실패하였습니다.',
+                '이메일 또는 패스워드를 다시 확인해주세요.',
+            );
+        }
     }
 
     async function joinMembership(
@@ -34,10 +44,15 @@ export default function useDjango() {
             gender: gender,
         };
 
-        const result = await axiosInstance.post('account/signup/', request);
+        try {
+            const result = await axiosInstance.post('account/signup/', request);
 
-        console.log(result.data); // Token 확인(추후 상태관리 예정)
-        navigation.navigate('Main');
+            await setToken(result.data.Token);
+            navigation.navigate('Main');
+        } catch {
+            Alert.alert('회원가입에 실패하였습니다.', '문의 부탁드립니다.');
+            navigation.goBack();
+        }
     }
 
     async function createBoard(
@@ -51,10 +66,18 @@ export default function useDjango() {
             is_secret: isSecret,
         };
 
-        const result = await axiosInstance.post('board/create/', request);
+        try {
+            if (token === 'empty') Error('empty');
 
-        console.log(result.status); // status code 확인 후 예외 처리 예정(ex: alert)
-        navigation.goBack();
+            await axiosInstance.post('board/create/', request);
+            navigation.goBack();
+
+            Alert.alert('보드 만들기에 성공하였습니다.');
+        } catch {
+            navigation.goBack();
+
+            Alert.alert('보드 만들기에 실패하였습니다.', '문의 부탁드립니다.');
+        }
     }
 
     return {attemptingLogin, joinMembership, createBoard};
