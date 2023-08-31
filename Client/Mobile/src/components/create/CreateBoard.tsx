@@ -12,6 +12,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {StackNavigationType} from '../Stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import useDjango from '../../hooks/useDjango';
+import {getToken} from '../../utils/storage';
 
 export default function CreateBoard({
     navigation,
@@ -24,11 +25,8 @@ export default function CreateBoard({
     const {createBoard} = useDjango();
 
     async function onPressCreate() {
-        await createBoard(
-            'c6eff0852a3f9e7143d7a9fdef327c509b0dd037',
-            name,
-            switchValue,
-        ); // token hard coding해둠 추후에 상태관리하면서 변경해야함
+        const token = await getToken();
+        await createBoard(token, name, switchValue); // token hard coding해둠 추후에 상태관리하면서 변경해야함
     }
 
     return (

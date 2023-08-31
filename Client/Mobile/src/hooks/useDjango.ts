@@ -67,6 +67,8 @@ export default function useDjango() {
         };
 
         try {
+            if (token === 'empty') Error('empty');
+
             await axiosInstance.post('board/create/', request);
             navigation.goBack();
 
