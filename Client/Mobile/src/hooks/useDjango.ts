@@ -1,6 +1,8 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import axiosInstance from '../utils/axios';
 import {StackNavigationType} from '../components/Stack';
+import {Alert} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function useDjango() {
     const navigation = useNavigation<NavigationProp<StackNavigationType>>();
@@ -10,10 +12,17 @@ export default function useDjango() {
             email: email,
             password: password,
         };
-        const result = await axiosInstance.post('account/login/', request);
+        try {
+            const result = await axiosInstance.post('account/login/', request);
 
-        console.log(result.data); // Token 확인(추후 상태관리 예정)
-        navigation.navigate('Main');
+            AsyncStorage.setItem('Token', result.data.Token);
+            navigation.navigate('Main');
+        } catch {
+            Alert.alert(
+                '로그인에 실패하였습니다.',
+                '이메일 또는 패스워드를 다시 확인해주세요.',
+            );
+        }
     }
 
     async function joinMembership(
