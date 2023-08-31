@@ -28,7 +28,7 @@ class GetBoardView(APIView):
     def get(self, request):
         try:
             queryset = models.Board.objects.filter(token=request.auth)
-            value = queryset.values("board_name")
+            value = queryset.values("board_name", "is_secret")
 
             return Response(data=value, status=status.HTTP_200_OK)
 
