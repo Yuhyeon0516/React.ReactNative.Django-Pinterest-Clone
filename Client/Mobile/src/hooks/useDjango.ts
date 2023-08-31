@@ -12,6 +12,7 @@ export default function useDjango() {
             email: email,
             password: password,
         };
+
         try {
             const result = await axiosInstance.post('account/login/', request);
 
@@ -43,10 +44,15 @@ export default function useDjango() {
             gender: gender,
         };
 
-        const result = await axiosInstance.post('account/signup/', request);
+        try {
+            const result = await axiosInstance.post('account/signup/', request);
 
-        console.log(result.data); // Token 확인(추후 상태관리 예정)
-        navigation.navigate('Main');
+            AsyncStorage.setItem('Token', result.data.Token);
+            navigation.navigate('Main');
+        } catch {
+            Alert.alert('회원가입에 실패하였습니다.', '문의 부탁드립니다.');
+            navigation.goBack();
+        }
     }
 
     async function createBoard(
