@@ -2,7 +2,7 @@ import {NavigationProp, useNavigation} from '@react-navigation/native';
 import axiosInstance from '../utils/axios';
 import {StackNavigationType} from '../components/Stack';
 import {Alert} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {setToken} from '../utils/storage';
 
 export default function useDjango() {
     const navigation = useNavigation<NavigationProp<StackNavigationType>>();
@@ -16,7 +16,7 @@ export default function useDjango() {
         try {
             const result = await axiosInstance.post('account/login/', request);
 
-            AsyncStorage.setItem('Token', result.data.Token);
+            await setToken(result.data.Token);
             navigation.navigate('Main');
         } catch {
             Alert.alert(
@@ -47,7 +47,7 @@ export default function useDjango() {
         try {
             const result = await axiosInstance.post('account/signup/', request);
 
-            AsyncStorage.setItem('Token', result.data.Token);
+            await setToken(result.data.Token);
             navigation.navigate('Main');
         } catch {
             Alert.alert('회원가입에 실패하였습니다.', '문의 부탁드립니다.');
@@ -66,10 +66,16 @@ export default function useDjango() {
             is_secret: isSecret,
         };
 
-        const result = await axiosInstance.post('board/create/', request);
+        try {
+            await axiosInstance.post('board/create/', request);
+            navigation.goBack();
 
-        console.log(result.status); // status code 확인 후 예외 처리 예정(ex: alert)
-        navigation.goBack();
+            Alert.alert('보드 만들기에 성공하였습니다.');
+        } catch {
+            navigation.goBack();
+
+            Alert.alert('보드 만들기에 실패하였습니다.', '문의 부탁드립니다.');
+        }
     }
 
     return {attemptingLogin, joinMembership, createBoard};
