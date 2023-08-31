@@ -1,28 +1,45 @@
 import {View, Text, Image, Animated, useWindowDimensions} from 'react-native';
-import React, {useEffect, useRef} from 'react';
+import React, {useCallback, useEffect, useRef} from 'react';
 import LoginBtn from './LoginBtn';
 import LinearGradient from 'react-native-linear-gradient';
 import LoginPopup from './LoginPopup';
 import JoinPopup from './JoinPopup';
+import {StackNavigationType} from '../Stack';
+import {NavigationProp} from '@react-navigation/native';
+import {getToken} from '../../utils/storage';
 
-export default function Login() {
+export default function Login({
+    navigation,
+}: {
+    navigation: NavigationProp<StackNavigationType>;
+}) {
     const {width} = useWindowDimensions();
     const bgYAnim = useRef(new Animated.Value(50)).current;
     const loginPopupYAnim = useRef(new Animated.Value(1000)).current;
     const joinPopupYAnim = useRef(new Animated.Value(1000)).current;
 
+    const isLogin = useCallback(async () => {
+        const token = await getToken();
+
+        if (token !== 'empty') {
+            Animated.loop(
+                Animated.timing(bgYAnim, {
+                    toValue: -1000,
+                    duration: 80000,
+                    useNativeDriver: false,
+                }),
+                {
+                    resetBeforeIteration: true,
+                },
+            ).start();
+        } else {
+            navigation.navigate('Main');
+        }
+    }, [bgYAnim, navigation]);
+
     useEffect(() => {
-        Animated.loop(
-            Animated.timing(bgYAnim, {
-                toValue: -1000,
-                duration: 80000,
-                useNativeDriver: false,
-            }),
-            {
-                resetBeforeIteration: true,
-            },
-        ).start();
-    }, [bgYAnim]);
+        isLogin();
+    }, [isLogin]);
 
     const imagePath: any = {
         0: require('../../../assets/background/Background0.png'),
