@@ -36,9 +36,26 @@ export default function useDjango() {
 
         const result = await axiosInstance.post('account/signup/', request);
 
-        console.log(result.data);
+        console.log(result.data); // Token 확인(추후 상태관리 예정)
         navigation.navigate('Main');
     }
 
-    return {attemptingLogin, joinMembership};
+    async function createBoard(
+        token: string,
+        boardName: string,
+        isSecret: boolean,
+    ) {
+        const request = {
+            token: token,
+            board_name: boardName,
+            is_secret: isSecret,
+        };
+
+        const result = await axiosInstance.post('board/create/', request);
+
+        console.log(result.status); // status code 확인 후 예외 처리 예정(ex: alert)
+        navigation.goBack();
+    }
+
+    return {attemptingLogin, joinMembership, createBoard};
 }
