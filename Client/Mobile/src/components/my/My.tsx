@@ -407,7 +407,6 @@ export default function My({
                                     style={{
                                         width: '50%',
                                         flexDirection: 'row',
-                                        alignItems: 'center',
                                         gap: 20,
                                     }}>
                                     <View style={{gap: 20}}>
