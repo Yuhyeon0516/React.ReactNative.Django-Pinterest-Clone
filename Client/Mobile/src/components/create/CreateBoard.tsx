@@ -13,6 +13,8 @@ import {StackNavigationType} from '../Stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import useDjango from '../../hooks/useDjango';
 import {getToken} from '../../utils/storage';
+import {useRecoilValue} from 'recoil';
+import {nameState} from '../../utils/recoil';
 
 export default function CreateBoard({
     navigation,
@@ -23,10 +25,11 @@ export default function CreateBoard({
     const [name, setName] = useState('');
     const [switchValue, setSwitchValue] = useState(false);
     const {createBoard} = useDjango();
+    const userName = useRecoilValue(nameState);
 
     async function onPressCreate() {
         const token = await getToken();
-        await createBoard(token, name, switchValue); // token hard coding해둠 추후에 상태관리하면서 변경해야함
+        await createBoard(token, name, switchValue);
     }
 
     return (
@@ -134,7 +137,7 @@ export default function CreateBoard({
                                 textAlign: 'center',
                                 color: 'white',
                             }}>
-                            김
+                            {userName[0]}
                         </Text>
                     </View>
 

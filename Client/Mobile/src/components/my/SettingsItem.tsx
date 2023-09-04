@@ -1,6 +1,9 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {StackNavigationType} from '../Stack';
 
 export default function SettingsItem({
     sectionName,
@@ -11,8 +14,17 @@ export default function SettingsItem({
 }) {
     const iconName =
         sectionName === '지원' ? 'arrow-outward' : 'arrow-forward-ios';
+
+    const navigation = useNavigation<NavigationProp<StackNavigationType>>();
+
+    function onPressLogout() {
+        AsyncStorage.removeItem('Token');
+        navigation.navigate('Login');
+    }
+
     return (
-        <View
+        <TouchableOpacity
+            onPress={onPressLogout}
             style={{
                 width: '100%',
                 height: 50,
@@ -47,6 +59,6 @@ export default function SettingsItem({
                     <MaterialIcons name={iconName} size={25} color={'white'} />
                 )}
             </View>
-        </View>
+        </TouchableOpacity>
     );
 }
