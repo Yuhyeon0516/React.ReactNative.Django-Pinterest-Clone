@@ -2,9 +2,12 @@ import React from 'react';
 import { styled } from 'styled-components';
 
 const Main = styled.div`
+    position: absolute;
     display: flex;
-    height: 60px;
     flex-direction: row;
+    width: 100%;
+    height: 60px;
+
     align-items: center;
     justify-content: space-between;
 `;
@@ -45,7 +48,7 @@ export default function Header() {
                     <Text>언론</Text>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'row', gap: 15, alignItems: 'center' }}>
+                <div style={{ display: 'flex', flexDirection: 'row', gap: 15, alignItems: 'center', marginRight: 30 }}>
                     <Button $backgroundColor="red" $textColor="white">
                         로그인
                     </Button>
