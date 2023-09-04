@@ -216,7 +216,10 @@ export default function LoginPopup({
                             title="로그인"
                             textColor="white"
                             onPress={() => {
+                                onPressClose();
                                 attemptingLogin(email, password);
+                                setEmail('');
+                                setPassword('');
                             }}
                         />
                     </View>

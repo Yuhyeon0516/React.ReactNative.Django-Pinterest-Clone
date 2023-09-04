@@ -21,7 +21,7 @@ export default function Login({
     const isLogin = useCallback(async () => {
         const token = await getToken();
 
-        if (token !== 'empty') {
+        if (token === 'empty') {
             Animated.loop(
                 Animated.timing(bgYAnim, {
                     toValue: -1000,
