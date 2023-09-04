@@ -15,7 +15,13 @@ import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {TabParam} from '../main/MainTab';
 import {MyStackNavigationType} from './MyStack';
 import {useRecoilValue} from 'recoil';
-import {emailState, nameState} from '../../utils/recoil';
+import {emailState, myBoardState, nameState} from '../../utils/recoil';
+import BoardItem from './BoardItem';
+
+export type BoardType = {
+    board_name: string;
+    is_secret: boolean;
+};
 
 export default function My({
     navigation,
@@ -33,6 +39,22 @@ export default function My({
     const myNavigation = useNavigation<NavigationProp<MyStackNavigationType>>();
     const userName = useRecoilValue(nameState);
     const userEmail = useRecoilValue(emailState);
+    const myBoard: BoardType[] = useRecoilValue(myBoardState);
+    const evenBoard = myBoard.filter((_, index) => {
+        if ((index + 1) % 2 === 0) {
+            return true;
+        }
+
+        return false;
+    });
+
+    const oddBoard = myBoard.filter((_, index) => {
+        if ((index + 1) % 2 !== 0) {
+            return true;
+        }
+
+        return false;
+    });
 
     const panRes = PanResponder.create({
         onMoveShouldSetPanResponder: () => true,
@@ -281,7 +303,7 @@ export default function My({
                                         textAlign: 'center',
                                         color: 'white',
                                     }}>
-                                    김
+                                    {userName[0]}
                                 </Text>
                             </Animated.View>
 
@@ -373,50 +395,90 @@ export default function My({
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        <View style={{width: '50%', height: '100%'}}>
-                            <View
-                                style={{
-                                    width: '100%',
-                                    paddingHorizontal: 20,
-                                    marginVertical: 50,
-                                }}>
-                                <Text
-                                    style={{
-                                        fontSize: 24,
-                                        fontWeight: '600',
-                                        color: '#797678',
-                                        textAlign: 'center',
-                                    }}>
-                                    아직 저장한 아이디어가 없습니다.
-                                </Text>
-                            </View>
 
-                            <View
-                                style={{
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                }}>
-                                <TouchableOpacity
-                                    onPress={() =>
-                                        navigation.navigate('Search')
-                                    }>
+                        <View
+                            style={{
+                                width: '50%',
+                                height: '100%',
+                                paddingHorizontal: 10,
+                            }}>
+                            {myBoard.length ? (
+                                <View
+                                    style={{
+                                        width: '50%',
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        gap: 20,
+                                    }}>
+                                    <View style={{gap: 20}}>
+                                        {oddBoard.map((item, index) => {
+                                            return (
+                                                <BoardItem
+                                                    key={index}
+                                                    item={item}
+                                                />
+                                            );
+                                        })}
+                                    </View>
+
+                                    <View style={{gap: 20}}>
+                                        {evenBoard.map((item, index) => {
+                                            return (
+                                                <BoardItem
+                                                    key={index}
+                                                    item={item}
+                                                />
+                                            );
+                                        })}
+                                    </View>
+                                </View>
+                            ) : (
+                                <>
                                     <View
                                         style={{
-                                            backgroundColor: '#211F20',
+                                            width: '100%',
                                             paddingHorizontal: 20,
-                                            paddingVertical: 20,
-                                            borderRadius: 100,
+                                            marginVertical: 50,
                                         }}>
                                         <Text
                                             style={{
-                                                fontSize: 16,
-                                                color: 'white',
+                                                fontSize: 24,
+                                                fontWeight: '600',
+                                                color: '#797678',
+                                                textAlign: 'center',
                                             }}>
-                                            아이디어 찾기
+                                            아직 저장한 아이디어가 없습니다.
                                         </Text>
                                     </View>
-                                </TouchableOpacity>
-                            </View>
+
+                                    <View
+                                        style={{
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                        }}>
+                                        <TouchableOpacity
+                                            onPress={() =>
+                                                navigation.navigate('Search')
+                                            }>
+                                            <View
+                                                style={{
+                                                    backgroundColor: '#211F20',
+                                                    paddingHorizontal: 20,
+                                                    paddingVertical: 20,
+                                                    borderRadius: 100,
+                                                }}>
+                                                <Text
+                                                    style={{
+                                                        fontSize: 16,
+                                                        color: 'white',
+                                                    }}>
+                                                    아이디어 찾기
+                                                </Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                    </View>
+                                </>
+                            )}
                         </View>
                     </Animated.View>
                 </ScrollView>
