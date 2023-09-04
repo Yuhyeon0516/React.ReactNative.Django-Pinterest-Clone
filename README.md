@@ -34,5 +34,8 @@ Web frontend configuration using React
 # Result
 
 -   Mobile
+  
+    ![Result](https://github.com/Yuhyeon0516/React.ReactNative.Django-Pinterest-Clone/assets/120432007/6ac16ab1-3e55-4a7b-975c-1746d4ffc95b)
+
 
 -   Web
