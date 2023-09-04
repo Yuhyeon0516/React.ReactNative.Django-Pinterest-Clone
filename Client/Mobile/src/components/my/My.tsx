@@ -14,6 +14,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {TabParam} from '../main/MainTab';
 import {MyStackNavigationType} from './MyStack';
+import {useRecoilValue} from 'recoil';
+import {emailState, nameState} from '../../utils/recoil';
 
 export default function My({
     navigation,
@@ -29,6 +31,8 @@ export default function My({
     const scrollAnim = useRef(new Animated.Value(0)).current;
     const scrollRef = useRef<ScrollView | null>(null);
     const myNavigation = useNavigation<NavigationProp<MyStackNavigationType>>();
+    const userName = useRecoilValue(nameState);
+    const userEmail = useRecoilValue(emailState);
 
     const panRes = PanResponder.create({
         onMoveShouldSetPanResponder: () => true,
@@ -156,7 +160,7 @@ export default function My({
                                     textAlign: 'center',
                                     color: 'white',
                                 }}>
-                                김
+                                {userName[0]}
                             </Text>
                         </View>
 
@@ -168,7 +172,7 @@ export default function My({
                                 fontWeight: 'bold',
                                 marginBottom: 15,
                             }}>
-                            김유현
+                            {userName}
                         </Text>
 
                         <Text
@@ -178,7 +182,7 @@ export default function My({
                                 color: '#7D7A7E',
                                 fontSize: 16,
                             }}>
-                            @rladbgus0516
+                            {userEmail}
                         </Text>
 
                         <Text
