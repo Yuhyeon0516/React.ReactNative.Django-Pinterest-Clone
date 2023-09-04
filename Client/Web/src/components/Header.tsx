@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 
 const Main = styled.div`
     display: flex;
+    height: 60px;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -23,7 +24,6 @@ const Button = styled.div<{ $backgroundColor: string; $textColor: string }>`
     padding-top: 10px;
     padding-bottom: 10px;
     border-radius: 30px;
-
     align-items: center;
     justify-content: center;
     display: flex;
