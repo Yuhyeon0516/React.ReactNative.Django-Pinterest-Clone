@@ -399,38 +399,42 @@ export default function My({
                         <View
                             style={{
                                 width: '50%',
-                                height: '100%',
                                 paddingHorizontal: 10,
                             }}>
                             {myBoard.length ? (
-                                <View
-                                    style={{
-                                        width: '50%',
-                                        flexDirection: 'row',
-                                        gap: 20,
-                                    }}>
-                                    <View style={{gap: 20}}>
-                                        {oddBoard.map((item, index) => {
-                                            return (
-                                                <BoardItem
-                                                    key={index}
-                                                    item={item}
-                                                />
-                                            );
-                                        })}
-                                    </View>
+                                <ScrollView>
+                                    <View
+                                        style={{
+                                            width: '50%',
+                                            flexDirection: 'row',
+                                            gap: 20,
+                                        }}>
+                                        <View style={{gap: 20}}>
+                                            {oddBoard.map((item, index) => {
+                                                return (
+                                                    <BoardItem
+                                                        key={index}
+                                                        item={item}
+                                                    />
+                                                );
+                                            })}
+                                        </View>
 
-                                    <View style={{gap: 20}}>
-                                        {evenBoard.map((item, index) => {
-                                            return (
-                                                <BoardItem
-                                                    key={index}
-                                                    item={item}
-                                                />
-                                            );
-                                        })}
+                                        <View style={{gap: 20}}>
+                                            {evenBoard.map((item, index) => {
+                                                return (
+                                                    <BoardItem
+                                                        key={index}
+                                                        item={item}
+                                                    />
+                                                );
+                                            })}
+                                        </View>
                                     </View>
-                                </View>
+                                    <View
+                                        style={{width: '100%', height: 200}}
+                                    />
+                                </ScrollView>
                             ) : (
                                 <>
                                     <View
