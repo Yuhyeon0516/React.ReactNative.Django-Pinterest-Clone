@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, useWindowDimensions} from 'react-native';
 import {BoardType} from './My';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function BoardItem({item}: {item: BoardType}) {
     const {width} = useWindowDimensions();
@@ -13,8 +14,16 @@ export default function BoardItem({item}: {item: BoardType}) {
                     height: width * 0.4,
                     backgroundColor: '#211F20',
                     borderRadius: 20,
-                }}
-            />
+                }}>
+                {item.is_secret && (
+                    <FontAwesome
+                        name="lock"
+                        color={'white'}
+                        size={20}
+                        style={{left: 15, top: 15}}
+                    />
+                )}
+            </View>
             <View style={{paddingLeft: 10, gap: 10}}>
                 <Text style={{color: 'white'}}>{item.board_name}</Text>
                 <View style={{flexDirection: 'row', gap: 10}}>
