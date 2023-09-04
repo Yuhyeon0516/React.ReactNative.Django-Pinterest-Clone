@@ -148,7 +148,7 @@ export default function SixthSeq({onPressNext}: {onPressNext: () => void}) {
                     <View style={{gap: 10}}>
                         {[...Array(10)].map((_, index) => {
                             const isSelect =
-                                [...selectedImage].filter((item, _) => {
+                                [...selectedImage].filter((item, ____) => {
                                     if (item === index) {
                                         return true;
                                     }
@@ -217,7 +217,7 @@ export default function SixthSeq({onPressNext}: {onPressNext: () => void}) {
                     <View style={{gap: 10}}>
                         {[...Array(10)].map((_, index) => {
                             const isSelect =
-                                [...selectedImage].filter((item, _) => {
+                                [...selectedImage].filter((item, ___) => {
                                     if (item === index + 10) {
                                         return true;
                                     }
@@ -286,7 +286,7 @@ export default function SixthSeq({onPressNext}: {onPressNext: () => void}) {
                     <View style={{gap: 10}}>
                         {[...Array(10)].map((_, index) => {
                             const isSelect =
-                                [...selectedImage].filter((item, _) => {
+                                [...selectedImage].filter((item, __) => {
                                     if (item === index + 20) {
                                         return true;
                                     }

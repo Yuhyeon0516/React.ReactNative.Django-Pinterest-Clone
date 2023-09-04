@@ -2,10 +2,25 @@ import {NavigationProp, useNavigation} from '@react-navigation/native';
 import axiosInstance from '../utils/axios';
 import {StackNavigationType} from '../components/Stack';
 import {Alert} from 'react-native';
-import {setToken} from '../utils/storage';
+import {getToken, setToken} from '../utils/storage';
+import {useRecoilState} from 'recoil';
+import {emailState, nameState} from '../utils/recoil';
 
 export default function useDjango() {
     const navigation = useNavigation<NavigationProp<StackNavigationType>>();
+    const [_, setUserEmail] = useRecoilState(emailState);
+    const [__, setUserName] = useRecoilState(nameState);
+
+    async function getUserInfo() {
+        const user = await axiosInstance.get('account/signup/', {
+            headers: {
+                Authorization: 'Token ' + (await getToken()),
+            },
+        });
+
+        setUserEmail(user.data.email);
+        setUserName(user.data.username);
+    }
 
     async function attemptingLogin(email: string, password: string) {
         const request = {
@@ -17,6 +32,7 @@ export default function useDjango() {
             const result = await axiosInstance.post('account/login/', request);
 
             await setToken(result.data.Token);
+            await getUserInfo();
             navigation.navigate('Main');
         } catch {
             Alert.alert(
@@ -48,6 +64,7 @@ export default function useDjango() {
             const result = await axiosInstance.post('account/signup/', request);
 
             await setToken(result.data.Token);
+            await getUserInfo();
             navigation.navigate('Main');
         } catch {
             Alert.alert('회원가입에 실패하였습니다.', '문의 부탁드립니다.');

@@ -38,7 +38,7 @@ export default function Login({
     }, [bgYAnim, navigation]);
 
     useEffect(() => {
-        isLogin();
+        // isLogin();
     }, [isLogin]);
 
     const imagePath: any = {

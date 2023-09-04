@@ -5,6 +5,7 @@ import {
     StyleProp,
     ViewStyle,
 } from 'react-native';
+import React from 'react';
 
 interface LoginBtnPropsType {
     bgColor: string;
