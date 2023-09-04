@@ -13,14 +13,9 @@ Mobile frontend configuration using React Native
 -   [✅] Implementation of membership registration function in conjunction with Backend
 -   [✅] Implementation of login function in conjunction with Backend
 -   [✅] Implement board creation function in conjunction with Backend
--   [❌] Implement board search function in conjunction with Backend
--   [❌] Implement idea pin creation function in conjunction with Backend
--   [❌] Implement idea pin search function in conjunction with Backend
--   [❌] Implement pin creation function in conjunction with Backend
--   [❌] Implement pin creation inquiry in conjunction with Backend
--   [❌] Configure Home and My Tab with actual data by utilizing the part linked to the backend
--   [❌] Implementation of user state management using Recoil
--   [❌] Implementation of post status management using Recoil
+-   [✅] Implement board search function in conjunction with Backend
+-   [✅] Implementation of user state management using Recoil
+-   [✅] Implementation of post status management using Recoil
 
 Backend configuration using Django (Django Rest Framework)
 
@@ -29,10 +24,6 @@ Backend configuration using Django (Django Rest Framework)
 -   [✅] Implementation of User Email and Name search function using TokenAuthentication
 -   [✅] Implementation of board creation function
 -   [✅] Implementation of the function to view the board I uploaded
--   [❌] Implementation of idea pin creation function
--   [❌] Implementation of idea pin search function
--   [❌] Implementation of pin creation function
--   [❌] Implementation of pin search function
 
 Web frontend configuration using React
 
