@@ -4,12 +4,13 @@ import {StackNavigationType} from '../components/Stack';
 import {Alert} from 'react-native';
 import {getToken, setToken} from '../utils/storage';
 import {useRecoilState} from 'recoil';
-import {emailState, nameState} from '../utils/recoil';
+import {emailState, myBoardState, nameState} from '../utils/recoil';
 
 export default function useDjango() {
     const navigation = useNavigation<NavigationProp<StackNavigationType>>();
     const [_, setUserEmail] = useRecoilState(emailState);
     const [__, setUserName] = useRecoilState(nameState);
+    const [___, setMyBoard] = useRecoilState(myBoardState);
 
     async function getUserInfo() {
         const user = await axiosInstance.get('account/signup/', {
@@ -20,6 +21,16 @@ export default function useDjango() {
 
         setUserEmail(user.data.email);
         setUserName(user.data.username);
+    }
+
+    async function getMyBoard() {
+        const board = await axiosInstance.get('board/check/', {
+            headers: {
+                Authorization: 'Token ' + (await getToken()),
+            },
+        });
+
+        setMyBoard(board.data);
     }
 
     async function attemptingLogin(email: string, password: string) {
@@ -33,6 +44,7 @@ export default function useDjango() {
 
             await setToken(result.data.Token);
             await getUserInfo();
+            await getMyBoard();
             navigation.navigate('Main');
         } catch {
             Alert.alert(
@@ -65,6 +77,7 @@ export default function useDjango() {
 
             await setToken(result.data.Token);
             await getUserInfo();
+            await getMyBoard();
             navigation.navigate('Main');
         } catch {
             Alert.alert('회원가입에 실패하였습니다.', '문의 부탁드립니다.');
@@ -87,6 +100,7 @@ export default function useDjango() {
             if (token === 'empty') Error('empty');
 
             await axiosInstance.post('board/create/', request);
+            await getMyBoard();
             navigation.goBack();
 
             Alert.alert('보드 만들기에 성공하였습니다.');
