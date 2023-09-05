@@ -8,6 +8,8 @@ const Main = styled.div`
     width: 100%;
     height: 60px;
 
+    z-index: 10;
+
     align-items: center;
     justify-content: space-between;
 `;
