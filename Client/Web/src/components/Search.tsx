@@ -1,6 +1,8 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { styled } from 'styled-components';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 const Text = styled.div`
     font-size: 60px;
@@ -40,6 +42,22 @@ const Image = styled.img`
     border-radius: 20px;
 `;
 
+const DownButton = styled(motion.div)<{ $color: string }>`
+    display: flex;
+    position: absolute;
+    bottom: 80px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    background-color: ${(props) => props.$color};
+`;
+
 // #B47904 -> #507A67 -> #0B5FC8 -> #336845
 
 export default function Search() {
@@ -67,14 +85,11 @@ export default function Search() {
         },
     };
 
-    // 1 2 3 4 3 2 1
-    // 1 2 3 4 5 6 7
-
     const imageZipVariants = {
-        initial: (custom: number) => ({
+        initial: {
             opacity: 0,
-            y: 270 * (custom > 4 ? custom - (custom - 4) * 2 : custom),
-        }),
+            y: 2000,
+        },
         visiable: (custom: number) => ({
             opacity: 1,
             y: 135 * (custom > 4 ? custom - (custom - 4) * 2 : custom),
@@ -168,7 +183,17 @@ export default function Search() {
     }
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', position: 'relative' }}>
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '100vw',
+                height: '100vh',
+                position: 'relative',
+            }}
+        >
             <div style={{ position: 'absolute', alignItems: 'center', justifyContent: 'center', zIndex: 2 }}>
                 <Text style={{ textAlign: 'center' }}>다음</Text>
 
@@ -204,7 +229,8 @@ export default function Search() {
                     justifyContent: 'center',
                     gap: 20,
                     position: 'absolute',
-                    height: '100vh',
+                    height: '100%',
+                    width: '100%',
                     overflow: 'hidden',
                 }}
             >
@@ -271,6 +297,29 @@ export default function Search() {
                     )}
                 </AnimatePresence>
             </div>
+
+            {/*  */}
+
+            <div
+                style={{
+                    width: '100vw',
+                    height: 70,
+                    backgroundColor: '#FFFF80',
+                    position: 'absolute',
+                    bottom: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 10,
+                }}
+            >
+                <p style={{ fontSize: 18, fontWeight: '600' }}>방식은 다음과 같습니다</p>
+                <FontAwesomeIcon style={{ alignSelf: 'flex-start', marginTop: 22 }} icon={faChevronDown} color="black" size="lg" />
+            </div>
+
+            <DownButton $color={searchText[imageNum].color} animate={{ translateY: -30 }} transition={{ duration: 1, repeat: Infinity, repeatType: 'reverse' }}>
+                <FontAwesomeIcon icon={faChevronDown} color="white" size="xl" />
+            </DownButton>
         </div>
     );
 }
