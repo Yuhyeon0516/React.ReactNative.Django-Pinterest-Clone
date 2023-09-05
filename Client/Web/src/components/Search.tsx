@@ -94,7 +94,7 @@ export default function Search() {
             opacity: 1,
             y: 135 * (custom > 4 ? custom - (custom - 4) * 2 : custom),
             transitionDelay: `${0.3 * custom}s`,
-            transitionDuration: '0.5s',
+            transitionDuration: '1s',
         }),
         exit: {
             opacity: 0,
@@ -298,7 +298,7 @@ export default function Search() {
                 </AnimatePresence>
             </div>
 
-            {/*  */}
+            <div style={{ position: 'absolute', background: 'linear-gradient(#ffffff10, #ffffff)', bottom: 0, width: '100%', height: 200 }}></div>
 
             <div
                 style={{
