@@ -317,7 +317,7 @@ export default function Search() {
                 <FontAwesomeIcon style={{ alignSelf: 'flex-start', marginTop: 22 }} icon={faChevronDown} color="black" size="lg" />
             </div>
 
-            <DownButton $color={searchText[imageNum].color}>
+            <DownButton $color={searchText[imageNum].color} animate={{ translateY: -30 }} transition={{ duration: 1, repeat: Infinity, repeatType: 'reverse' }}>
                 <FontAwesomeIcon icon={faChevronDown} color="white" size="xl" />
             </DownButton>
         </div>
