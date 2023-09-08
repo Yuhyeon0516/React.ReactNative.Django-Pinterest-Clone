@@ -182,13 +182,13 @@ export default function Search() {
         }, 300);
     }
 
-    useEffect(() => {
-        setInterval(() => {
-            const tempDotNum = dotNum;
+    // useEffect(() => {
+    //     setInterval(() => {
+    //         const tempDotNum = dotNum;
 
-            onPressDot((tempDotNum % 4) + 1);
-        }, 10000);
-    }, [dotNum]);
+    //         onPressDot((tempDotNum % 4) + 1);
+    //     }, 10000);
+    // }, [dotNum]);
 
     return (
         <div
