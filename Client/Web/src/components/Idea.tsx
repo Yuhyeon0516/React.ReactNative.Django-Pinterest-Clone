@@ -14,6 +14,7 @@ const IdeaHalfMain = styled.div`
     width: 50%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
@@ -50,7 +51,29 @@ function Idea() {
                     <div style={{ flex: 1, textAlign: 'center', color: '#5A022E', fontSize: 24, fontWeight: 'bold' }}>닭고기로 만드는 손쉬운 저녁 메뉴</div>
                 </ChickenTextBox>
             </IdeaHalfMain>
-            <IdeaHalfMain style={{ backgroundColor: 'lightgreen' }}></IdeaHalfMain>
+            <IdeaHalfMain style={{ gap: 20 }}>
+                <div style={{ fontSize: 60, fontWeight: 'bold', color: '#B40041' }}>아이디어 검색</div>
+                <div style={{ marginLeft: 150, marginRight: 150, textAlign: 'center', fontSize: 24, color: '#B40041' }}>
+                    어떤 것을 시도해 보고 싶으세요? '닭고기로 만드는 간단한 저녁 메뉴'와 같이 관심 있는 내용을 검색하고 결과를 확인해 보세요.
+                </div>
+                <div
+                    style={{
+                        width: 100,
+                        height: 50,
+                        fontSize: 16,
+                        fontWeight: 'bold',
+                        textAlign: 'center',
+                        backgroundColor: '#B40041',
+                        color: '#ffff80',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        borderRadius: 40,
+                    }}
+                >
+                    탐색
+                </div>
+            </IdeaHalfMain>
         </IdeaMain>
     );
 }
