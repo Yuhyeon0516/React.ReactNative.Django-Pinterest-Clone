@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
@@ -181,6 +181,14 @@ export default function Search() {
             setImageNum(dot - 1);
         }, 300);
     }
+
+    useEffect(() => {
+        setInterval(() => {
+            const tempDotNum = dotNum;
+
+            onPressDot((tempDotNum % 4) + 1);
+        }, 10000);
+    }, [dotNum]);
 
     return (
         <div
