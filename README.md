@@ -27,15 +27,17 @@ Backend configuration using Django (Django Rest Framework)
 
 Web frontend configuration using React
 
--   [❌] Mobile app UI development
--   [❌] Development of detailed animation of mobile app UI
--   [❌] Apply using the backend applied to the mobile app
+-   [✅] Mobile app UI development
+-   [✅] Development of detailed animation of web app UI
 
 # Result
 
 -   Mobile
   
-    ![Result](https://github.com/Yuhyeon0516/React.ReactNative.Django-Pinterest-Clone/assets/120432007/6ac16ab1-3e55-4a7b-975c-1746d4ffc95b)
+    ![MobileResult](https://github.com/Yuhyeon0516/React.ReactNative.Django-Pinterest-Clone/assets/120432007/6ac16ab1-3e55-4a7b-975c-1746d4ffc95b)
 
 
 -   Web
+
+    ![WebResult](https://github.com/Yuhyeon0516/React.ReactNative.Django-Pinterest-Clone/assets/120432007/b384ba30-133a-4ecf-88c5-3d4cf10c0eb3)
+    
