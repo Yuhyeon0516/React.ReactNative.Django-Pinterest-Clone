@@ -8,6 +8,14 @@ const JoinMain = styled.div`
     position: relative;
 `;
 
+const JoinHalfMain = styled.div`
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
 const HyperText = styled.span`
     color: black;
     font-weight: 600;
@@ -138,6 +146,13 @@ function Join() {
                 </ImageVerticalLine>
                 <div style={{ position: 'absolute', width: '100%', height: '100%', backgroundColor: '#00000060' }}></div>
             </Background>
+
+            <JoinHalfMain style={{ zIndex: 10 }}>
+                <span style={{ fontSize: 70, fontWeight: 600, color: 'white', margin: 170 }}>가입하여 더 많은 아이디어를 만나보세요</span>
+            </JoinHalfMain>
+
+            <JoinHalfMain style={{ zIndex: 10 }}></JoinHalfMain>
+
             <div
                 style={{
                     width: '100%',
