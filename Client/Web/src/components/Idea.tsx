@@ -23,7 +23,6 @@ const IdeaHalfMain = styled.div`
 const ChickenImage = styled.img<{ $scale: number }>`
     position: absolute;
     transform: scale(${(props) => props.$scale});
-    transform: translateX();
 `;
 
 const ChickenTextBox = styled.div`
