@@ -22,6 +22,32 @@ function Run() {
         <RunMain>
             <RunHalfMain>
                 <img src="https://s.pinimg.com/webapp/shop-bd0c8a04.png" alt="left" style={{ width: '100%', height: '100%' }} />
+                <div
+                    style={{
+                        width: '50%',
+                        height: '50%',
+                        position: 'absolute',
+                        left: 0,
+                        bottom: 0,
+                    }}
+                >
+                    <div style={{ width: '70%', height: '90%', position: 'absolute', right: 50, top: -70 }}>
+                        <img
+                            src="https://s.pinimg.com/webapp/creator-pin-img-491ebb56.png"
+                            alt="사진1"
+                            style={{ width: '90%', height: '100%', position: 'absolute', right: 0, borderRadius: 20 }}
+                        />
+                        <img
+                            src="https://s.pinimg.com/webapp/creator-avatar-d7a05622.png"
+                            alt="사진2"
+                            style={{ width: 100, height: 100, position: 'absolute', bottom: -40, left: -20 }}
+                        />
+                        <div style={{ position: 'absolute', display: 'flex', flexDirection: 'column', bottom: -50, left: 100 }}>
+                            <span style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }}>Scout the City</span>
+                            <span style={{ color: 'white' }}>팔로워 56,700명</span>
+                        </div>
+                    </div>
+                </div>
             </RunHalfMain>
 
             <RunHalfMain style={{ backgroundColor: '#FCDAE6' }}>
