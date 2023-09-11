@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 const JoinMain = styled.div`
     height: 100vh;
@@ -51,6 +53,35 @@ const Image = styled.img`
     height: 350px;
 
     border-radius: 20px;
+`;
+
+const Input = styled.input`
+    border-color: #c2c2c2;
+    border-width: 0.7px;
+    border-radius: 15px;
+    width: 100%;
+    height: 50px;
+    padding: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 18px;
+
+    ::placeholder {
+        color: #c2c2c2;
+    }
+`;
+
+const Button = styled.div`
+    border-radius: 20px;
+    width: 100%;
+    height: 45px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 function Join() {
@@ -151,7 +182,83 @@ function Join() {
                 <span style={{ fontSize: 70, fontWeight: 600, color: 'white', margin: 170 }}>가입하여 더 많은 아이디어를 만나보세요</span>
             </JoinHalfMain>
 
-            <JoinHalfMain style={{ zIndex: 10 }}></JoinHalfMain>
+            <JoinHalfMain style={{ zIndex: 10 }}>
+                <div
+                    style={{
+                        height: '80%',
+                        width: '65%',
+                        backgroundColor: 'white',
+                        borderRadius: 30,
+                        position: 'relative',
+                        overflow: 'hidden',
+                        paddingLeft: 120,
+                        paddingRight: 120,
+                        paddingTop: 30,
+                        paddingBottom: 80,
+                        boxSizing: 'border-box',
+                    }}
+                >
+                    <div
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: 0,
+                        }}
+                    >
+                        <img src={require('../assets/Icon.png')} alt="아이콘" style={{ width: 50, height: 50, marginBottom: 20 }} />
+                        <h1 style={{ fontSize: 32, fontWeight: 600, textAlign: 'center', margin: 0 }}>Pinterest에 오신 것을 환영합니다</h1>
+                        <span style={{ marginBottom: 20 }}>시도해 볼 만한 새로운 아이디어 찾기</span>
+
+                        <span style={{ textAlign: 'left', alignSelf: 'flex-start' }}>이메일</span>
+                        <Input placeholder="이메일" />
+
+                        <span style={{ textAlign: 'left', alignSelf: 'flex-start' }}>비밀번호</span>
+                        <Input placeholder="비밀번호를 입력하세요" />
+
+                        <span style={{ textAlign: 'left', alignSelf: 'flex-start' }}>생년월일</span>
+                        <Input placeholder="2023. 09. 11" />
+
+                        <Button style={{ backgroundColor: 'red' }}>
+                            <span style={{ color: 'white' }}>계속하기</span>
+                        </Button>
+
+                        <span style={{ fontWeight: 'bold', marginBottom: 10 }}>또는</span>
+
+                        <Button style={{ backgroundColor: '#165DEE' }}>
+                            <FontAwesomeIcon icon={faFacebook} size="xl" style={{ color: 'white', marginLeft: 20 }} />
+                            <span style={{ color: 'white', fontSize: 18, fontWeight: '900', flex: 1, textAlign: 'center' }}>Facebook으로 계속하기</span>
+                        </Button>
+
+                        <Button style={{ backgroundColor: 'white', border: '1px solid #D1D4D9' }}>
+                            <img
+                                src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
+                                alt="Google"
+                                style={{ width: 35, height: 35, marginLeft: 15 }}
+                            />
+                            <span style={{ fontSize: 18, flex: 1, textAlign: 'center' }}>Google 계정으로 계속하기</span>
+                        </Button>
+                    </div>
+                    <div
+                        style={{
+                            height: 50,
+                            width: '100%',
+                            backgroundColor: '#E4E4E4',
+                            position: 'absolute',
+                            bottom: 0,
+                            left: 0,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                        }}
+                    >
+                        <span style={{ color: 'black', fontSize: 18, fontWeight: 500 }}>무료 Business 계정 만들기</span>
+                    </div>
+                </div>
+            </JoinHalfMain>
 
             <div
                 style={{
