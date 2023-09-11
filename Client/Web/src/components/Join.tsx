@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 const JoinMain = styled.div`
     height: 100vh;
@@ -82,6 +83,7 @@ const Button = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
 `;
 
 function Join() {
@@ -185,7 +187,7 @@ function Join() {
             <JoinHalfMain style={{ zIndex: 10 }}>
                 <div
                     style={{
-                        height: '80%',
+                        height: '85%',
                         width: '65%',
                         backgroundColor: 'white',
                         borderRadius: 30,
@@ -230,7 +232,7 @@ function Join() {
 
                         <Button style={{ backgroundColor: '#165DEE' }}>
                             <FontAwesomeIcon icon={faFacebook} size="xl" style={{ color: 'white', marginLeft: 20 }} />
-                            <span style={{ color: 'white', fontSize: 18, fontWeight: '900', flex: 1, textAlign: 'center' }}>Facebook으로 계속하기</span>
+                            <span style={{ color: 'white', fontSize: 18, fontWeight: 'bold', flex: 1, textAlign: 'center' }}>Facebook으로 계속하기</span>
                         </Button>
 
                         <Button style={{ backgroundColor: 'white', border: '1px solid #D1D4D9' }}>
@@ -241,6 +243,20 @@ function Join() {
                             />
                             <span style={{ fontSize: 18, flex: 1, textAlign: 'center' }}>Google 계정으로 계속하기</span>
                         </Button>
+
+                        <span style={{ color: '#5C5C5C', fontSize: 12 }}>
+                            계속 진행하면 Pinterest <strong style={{ color: 'black' }}>서비스 약관</strong>에 동의하고
+                        </span>
+
+                        <span style={{ color: '#5C5C5C', fontSize: 12 }}>
+                            <strong style={{ color: 'black' }}>개인정보 보호정책</strong>을 읽었음을 인정하는 것으로 간주됩니다.
+                        </span>
+
+                        <strong style={{ fontSize: 12, marginBottom: 10 }}>컬렉션 알림.</strong>
+
+                        <span style={{ color: '#5C5C5C', fontSize: 12 }}>
+                            이미 회원이신가요? <strong>로그인</strong>
+                        </span>
                     </div>
                     <div
                         style={{
@@ -259,6 +275,22 @@ function Join() {
                     </div>
                 </div>
             </JoinHalfMain>
+
+            <div style={{ position: 'absolute', width: '100%', height: 60, alignItems: 'center', justifyContent: 'center', display: 'flex', top: 80 }}>
+                <div
+                    style={{
+                        backgroundColor: '#880034',
+                        width: 60,
+                        height: 60,
+                        borderRadius: 60,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        display: 'flex',
+                    }}
+                >
+                    <FontAwesomeIcon icon={faChevronUp} color="white" size="xl" />
+                </div>
+            </div>
 
             <div
                 style={{
